@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dominick — Electronics & Power Systems</title>
+<meta name="description" content="Electronics engineer specializing in power electronics, embedded systems, and energy systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E12;
+    --panel:#10161C;
+    --panel-2:#0D1319;
+    --line:#1E2830;
+    --line-soft:#161E25;
+    --text:#E7EDF2;
+    --text-dim:#8CA0AF;
+    --text-faint:#54636E;
+    --trace:#6EF2A6;
+    --trace-dim:#3A7A5C;
+    --amber:#FFB454;
+    --max:1120px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  /* background PCB grid */
+  body{
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-attachment: fixed;
+  }
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,14,18,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .logo{font-family:'IBM Plex Mono'; font-weight:600; font-size:15px; letter-spacing:0.5px;}
+  .logo .dot{color:var(--trace);}
+  .navlinks{display:flex; gap:28px; font-family:'IBM Plex Mono'; font-size:13px; color:var(--text-dim);}
+  .navlinks a{position:relative; padding:4px 0; transition:color .2s;}
+  .navlinks a:hover{color:var(--trace);}
+  .navlinks a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px;
+    background:var(--trace); transition:width .25s;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .navtoggle{display:none; background:none; border:1px solid var(--line); color:var(--text); font-family:'IBM Plex Mono'; padding:6px 10px; font-size:12px; border-radius:2px;}
+
+  /* HERO */
+  .hero{
+    padding:96px 0 72px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono'; font-size:12px; color:var(--trace);
+    letter-spacing:2px; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--trace-dim);}
+  .hero h1{
+    font-size:clamp(34px, 6vw, 64px);
+    font-weight:600; letter-spacing:-1px; line-height:1.06;
+    max-width:820px;
+  }
+  .hero h1 .accent{color:var(--trace);}
+  .hero p.lead{
+    margin-top:22px; max-width:560px; color:var(--text-dim); font-size:17px;
+  }
+  .hero-scope{
+    margin-top:44px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .scope-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 16px; border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono'; font-size:11px; color:var(--text-faint);
+  }
+  .scope-head .ch{color:var(--trace);}
+  canvas#scope{width:100%; height:180px; display:block;}
+  .hero-actions{margin-top:28px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono'; font-size:13px; padding:11px 20px;
+    border-radius:2px; border:1px solid var(--line); transition:all .2s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--trace); color:#08110C; border-color:var(--trace); font-weight:600;}
+  .btn-primary:hover{background:#8AFFC1;}
+  .btn-ghost{color:var(--text); border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--trace-dim); color:var(--trace);}
+
+  /* SECTION shared */
+  section{padding:80px 0; border-bottom:1px solid var(--line);}
+  .sec-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; gap:20px; flex-wrap:wrap;}
+  .sec-label{font-family:'IBM Plex Mono'; font-size:12px; color:var(--trace); letter-spacing:2px; text-transform:uppercase;}
+  .sec-title{font-size:clamp(24px,3.4vw,36px); font-weight:600; margin-top:8px; letter-spacing:-0.5px;}
+  .sec-note{font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-faint); max-width:260px; text-align:right;}
+
+  /* PROJECTS */
+  .project{
+    border:1px solid var(--line); background:var(--panel);
+    border-radius:4px; margin-bottom:20px; overflow:hidden;
+  }
+  .project-top{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 22px; cursor:pointer; gap:16px;
+  }
+  .project-top:hover{background:var(--panel-2);}
+  .project-id{font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-faint); min-width:52px;}
+  .project-name{font-size:19px; font-weight:600; flex:1;}
+  .project-tags{display:flex; gap:8px; flex-wrap:wrap;}
+  .tag{
+    font-family:'IBM Plex Mono'; font-size:10.5px; color:var(--trace);
+    border:1px solid var(--trace-dim); padding:3px 8px; border-radius:2px;
+    white-space:nowrap;
+  }
+  .project-chevron{font-family:'IBM Plex Mono'; color:var(--text-faint); font-size:18px; transition:transform .25s;}
+  .project.open .project-chevron{transform:rotate(45deg); color:var(--trace);}
+  .project-body{
+    max-height:0; overflow:hidden; transition:max-height .35s ease;
+    border-top:1px solid transparent;
+  }
+  .project.open .project-body{border-top:1px solid var(--line);}
+  .project-body-inner{padding:24px 22px 28px;}
+  .pipeline{
+    display:flex; flex-wrap:wrap; gap:0; margin-bottom:24px;
+    font-family:'IBM Plex Mono'; font-size:11px; color:var(--text-faint);
+  }
+  .pipeline span{padding:5px 10px; border:1px solid var(--line-soft); border-right:none;}
+  .pipeline span:last-child{border-right:1px solid var(--line-soft);}
+  .stage{
+    display:grid; grid-template-columns:120px 1fr; gap:18px; padding:14px 0;
+    border-top:1px solid var(--line-soft);
+  }
+  .stage:first-of-type{border-top:none;}
+  .stage-label{font-family:'IBM Plex Mono'; font-size:11px; color:var(--trace); letter-spacing:1px; text-transform:uppercase; padding-top:2px;}
+  .stage-text{color:var(--text-dim); font-size:14.5px;}
+  .specs{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:14px;
+    margin-top:22px; padding-top:20px; border-top:1px solid var(--line-soft);
+  }
+  .spec-k{font-family:'IBM Plex Mono'; font-size:10px; color:var(--text-faint); text-transform:uppercase;}
+  .spec-v{font-family:'IBM Plex Mono'; font-size:15px; color:var(--amber); margin-top:4px;}
+
+  @media (max-width:640px){
+    .stage{grid-template-columns:1fr;}
+  }
+
+  /* GRID CARDS (embedded / power) */
+  .cardgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  .card{
+    border:1px solid var(--line); background:var(--panel); border-radius:4px;
+    padding:22px; transition:border-color .2s;
+  }
+  .card:hover{border-color:var(--trace-dim);}
+  .card-icon{font-family:'IBM Plex Mono'; font-size:11px; color:var(--trace); margin-bottom:14px;}
+  .card h3{font-size:16px; font-weight:600; margin-bottom:8px;}
+  .card p{font-size:13.5px; color:var(--text-dim);}
+  .card.placeholder{border-style:dashed; opacity:.55;}
+  .card.placeholder p{color:var(--text-faint); font-style:italic;}
+  @media (max-width:700px){.cardgrid{grid-template-columns:1fr;}}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start;}
+  .about-text p{color:var(--text-dim); font-size:15.5px; margin-bottom:16px; max-width:520px;}
+  .about-text strong{color:var(--text); font-weight:600;}
+  .trajectory{border-left:1px solid var(--line); padding-left:24px;}
+  .traj-item{margin-bottom:22px; position:relative;}
+  .traj-item::before{
+    content:''; position:absolute; left:-29px; top:6px; width:7px; height:7px;
+    border-radius:50%; background:var(--trace); box-shadow:0 0 0 3px rgba(110,242,166,.15);
+  }
+  .traj-k{font-family:'IBM Plex Mono'; font-size:11px; color:var(--trace); letter-spacing:1px;}
+  .traj-v{font-size:14.5px; color:var(--text-dim); margin-top:3px;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+
+  /* FOOTER / CV */
+  footer{padding:64px 0 48px;}
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:40px;}
+  .footer-cta h2{font-size:clamp(22px,3vw,30px); font-weight:600;}
+  .footer-cta p{color:var(--text-dim); margin-top:8px; font-size:14.5px;}
+  .foot-links{display:flex; gap:14px; flex-wrap:wrap;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; padding-top:24px; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono'; font-size:11.5px; color:var(--text-faint); flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:760px){
+    .navlinks{display:none;}
+    .navtoggle{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo">DOMINICK<span class="dot">.</span>DEV</div>
+      <div class="navlinks">
+        <a href="#projects">Projects</a>
+        <a href="#embedded">Embedded</a>
+        <a href="#power">Power &amp; Energy</a>
+        <a href="#about">About</a>
+        <a href="#cv">CV</a>
+      </div>
+      <button class="navtoggle mono">MENU</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow mono">Electronics · Embedded · Power</div>
+    <h1>Building the circuits that <span class="accent">move energy</span> — from silicon to the grid.</h1>
+    <p class="lead">Electronics engineering student specializing in power electronics and hardware design. I design, build, and measure real systems — controllers, converters, and the boards underneath them.</p>
+
+    <div class="hero-scope">
+      <div class="scope-head">
+        <span><span class="ch">●</span> CH1 — SPWM OUTPUT</span>
+        <span>0–24 VAC · 50Hz TIMEBASE</span>
+      </div>
+      <canvas id="scope"></canvas>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">View Projects →</a>
+      <a class="btn btn-ghost" href="cv.pdf">Download CV</a>
+      <a class="btn btn-ghost" href="https://github.com/" target="_blank">GitHub</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label mono">01 — Selected Work</div>
+        <div class="sec-title">Projects</div>
+      </div>
+      <div class="sec-note">Each entry documents the full path: problem → objective → design → hardware → software → PCB → test → results.</div>
+    </div>
+
+    <!-- PROJECT 1 -->
+    <div class="project open">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.01</span>
+        <span class="project-name">0–24 VAC SPWM Controller (STM32)</span>
+        <span class="project-tags">
+          <span class="tag">STM32</span>
+          <span class="tag">SPWM</span>
+          <span class="tag">Isolation</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>PCB</span><span>TEST</span><span>RESULTS</span>
+          </div>
+
+          <div class="stage">
+            <div class="stage-label">Problem</div>
+            <div class="stage-text">Most bench AC sources for testing low-voltage loads are bulky, expensive, or lack fine amplitude control. A compact, digitally controlled source was needed for lab and prototype validation work.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Objective</div>
+            <div class="stage-text">Design a solid-state controller producing a variable AC output from 0–24 V, with adjustable frequency and clean sinusoidal shaping via SPWM.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Design</div>
+            <div class="stage-text">Full-bridge topology driven by an STM32 timer-generated SPWM pattern, LC output filter to reconstruct the sine wave, and galvanic isolation between control and power stages.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Hardware</div>
+            <div class="stage-text">Gate driver stage, H-bridge MOSFETs, gate isolation transformers, LC filter sized for the target frequency band, and protection circuitry for overcurrent conditions.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Software</div>
+            <div class="stage-text">STM32 firmware generating a lookup-table-based sine reference, timer PWM peripheral configured for the switching frequency, and a simple UART interface for amplitude/frequency commands.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">PCB</div>
+            <div class="stage-text">Two-stage board: isolated low-power control section and high-current power section, with careful trace width and creepage/clearance for the isolation barrier. <em style="color:var(--text-faint)">[schematic + layout images go here]</em></div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Test</div>
+            <div class="stage-text">Oscilloscope verification of SPWM switching, output waveform THD measurement after filtering, and thermal checks under sustained load. <em style="color:var(--text-faint)">[scope captures go here]</em></div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results &amp; Learnings</div>
+            <div class="stage-text">Achieved a clean, adjustable 0–24 VAC output with low distortion; refined filter sizing and gate isolation approach through iteration. <em style="color:var(--text-faint)">[add final numbers: THD %, efficiency, settling time]</em></div>
+          </div>
+
+          <div class="specs">
+            <div><div class="spec-k">Output</div><div class="spec-v">0–24 VAC</div></div>
+            <div><div class="spec-k">Control</div><div class="spec-v">STM32 / SPWM</div></div>
+            <div><div class="spec-k">Topology</div><div class="spec-v">Full-Bridge</div></div>
+            <div><div class="spec-k">Isolation</div><div class="spec-v">Galvanic</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.02</span>
+        <span class="project-name">1200W Power Distribution &amp; BMS — RoBorregos</span>
+        <span class="project-tags">
+          <span class="tag">BMS</span>
+          <span class="tag">Power Dist.</span>
+          <span class="tag">1st Place</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>PCB</span><span>TEST</span><span>RESULTS</span>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Problem</div>
+            <div class="stage-text">Competition robotics platforms draw high, variable current across multiple subsystems, and cell-level battery mismanagement risked downtime or damage during matches.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Objective</div>
+            <div class="stage-text">Deliver a reliable 1200 W power distribution architecture with active battery management, protecting the pack while supplying every subsystem cleanly.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Design / Hardware / PCB</div>
+            <div class="stage-text">Multi-rail distribution board with per-channel protection, paired with a custom BMS handling cell balancing, voltage/temperature monitoring, and fault cutoff. <em style="color:var(--text-faint)">[add schematic + board photos]</em></div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results</div>
+            <div class="stage-text">Team placed 1st nationally; the power system ran without a single battery-related failure across the competition. <em style="color:var(--text-faint)">[add specific reliability/uptime data]</em></div>
+          </div>
+          <div class="specs">
+            <div><div class="spec-k">Power</div><div class="spec-v">1200 W</div></div>
+            <div><div class="spec-k">Result</div><div class="spec-v">1st — National</div></div>
+            <div><div class="spec-k">Team</div><div class="spec-v">RoBorregos</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.03</span>
+        <span class="project-name">Custom Inductor Design — Bendix (COMSOL)</span>
+        <span class="project-tags">
+          <span class="tag">Magnetics</span>
+          <span class="tag">COMSOL</span>
+          <span class="tag">Simulation</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>SIMULATION</span><span>RESULTS</span>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Problem</div>
+            <div class="stage-text">An off-the-shelf inductor didn't meet the size, saturation current, and loss targets required for the application.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Objective</div>
+            <div class="stage-text">Design a custom inductor — core geometry, winding, and material — validated by electromagnetic simulation before physical build.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Design &amp; Simulation</div>
+            <div class="stage-text">Used COMSOL Multiphysics to model core saturation, winding losses, and thermal behavior across candidate geometries, iterating toward a design meeting the target inductance and current rating. <em style="color:var(--text-faint)">[add simulation plots]</em></div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results</div>
+            <div class="stage-text">Converged on a geometry meeting saturation and loss targets within the available footprint. <em style="color:var(--text-faint)">[add final spec numbers]</em></div>
+          </div>
+          <div class="specs">
+            <div><div class="spec-k">Tool</div><div class="spec-v">COMSOL</div></div>
+            <div><div class="spec-k">Domain</div><div class="spec-v">Magnetics</div></div>
+            <div><div class="spec-k">Partner</div><div class="spec-v">Bendix</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="embedded">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label mono">02 — Firmware / Hardware</div>
+        <div class="sec-title">Electronics &amp; Embedded</div>
+      </div>
+      <div class="sec-note">Microcontrollers, sensor integration, and the boards that hold it all together.</div>
+    </div>
+    <div class="cardgrid">
+      <div class="card">
+        <div class="card-icon mono">[MCU]</div>
+        <h3>STM32 Firmware</h3>
+        <p>Timer-driven PWM/SPWM generation, peripheral configuration, and UART control interfaces built for the 0–24 VAC controller and related bench tools.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon mono">[PCB]</div>
+        <h3>PCB Design &amp; Validation</h3>
+        <p>Schematic capture through fabrication, plus hands-on validation experience from a PCB validation internship at Carrier.</p>
+      </div>
+      <div class="card placeholder">
+        <div class="card-icon mono">[SNS]</div>
+        <h3>Sensor Integration</h3>
+        <p>Add a project here — e.g. sensor front-ends, signal conditioning, or a small ESP32-based data logger.</p>
+      </div>
+      <div class="card placeholder">
+        <div class="card-icon mono">[NANO]</div>
+        <h3>Micro/Nano Fabrication</h3>
+        <p>MIT NanoLab certificate in micro/nano production — worth a short writeup on what was fabricated and measured.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="power">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label mono">03 — Where This Is Heading</div>
+        <div class="sec-title">Power &amp; Energy Systems</div>
+      </div>
+      <div class="sec-note">Power electronics, battery energy storage, and grid-facing systems.</div>
+    </div>
+    <div class="cardgrid">
+      <div class="card">
+        <div class="card-icon mono">[PID]</div>
+        <h3>PID Control — DIRAM</h3>
+        <p>Closed-loop control work applied to a real industrial process, tuning for stability and response under load.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon mono">[VAC]</div>
+        <h3>SPWM Power Stage</h3>
+        <p>The 0–24 VAC controller doubles as a power-electronics case study: switching, filtering, and isolation design in one board.</p>
+      </div>
+      <div class="card placeholder">
+        <div class="card-icon mono">[BESS]</div>
+        <h3>Battery Energy Storage (BESS)</h3>
+        <p>Placeholder — a project or analysis around IEC 62619/62933-aligned BESS design under Mexico's 2026 CNE/CENACE framework.</p>
+      </div>
+      <div class="card placeholder">
+        <div class="card-icon mono">[GRID]</div>
+        <h3>Grid-Facing Power Electronics</h3>
+        <p>Placeholder — power factor correction, inverter design, or converter work aimed at energy-system applications.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label mono">04 — Who's Behind This</div>
+        <div class="sec-title">About</div>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm an electronics engineering student focused on <strong>power electronics and hardware design</strong> — the layer between control theory and the physical circuit that has to actually survive current, heat, and noise.</p>
+        <p>My work moves along one line: <strong>Electronics → Embedded Systems → Power Electronics → Energy Systems</strong>. Each project on this site is a step further into that specialization, from firmware and PCB layout toward converters, BMS design, and grid-facing power systems.</p>
+        <p>I'm currently exploring how that specialization applies to real energy infrastructure — battery storage, power quality, and the regulatory frameworks shaping how power electronics gets deployed at scale.</p>
+      </div>
+      <div class="trajectory">
+        <div class="traj-item">
+          <div class="traj-k mono">FOUNDATION</div>
+          <div class="traj-v">Electronics engineering, business engineering minor — Tecnológico de Monterrey</div>
+        </div>
+        <div class="traj-item">
+          <div class="traj-k mono">EMBEDDED</div>
+          <div class="traj-v">STM32 firmware, PCB design &amp; validation (Carrier), MIT NanoLab certificate</div>
+        </div>
+        <div class="traj-item">
+          <div class="traj-k mono">POWER</div>
+          <div class="traj-v">SPWM AC controller, custom magnetics with Bendix (COMSOL), 1200W BMS (RoBorregos)</div>
+        </div>
+        <div class="traj-item">
+          <div class="traj-k mono">NEXT</div>
+          <div class="traj-v">Energy systems — BESS, power quality, grid-facing converters</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="cv">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-cta">
+        <h2>Let's talk circuits.</h2>
+        <p>CV, code, and contact — all one click away.</p>
+      </div>
+      <div class="foot-links">
+        <a class="btn btn-primary" href="cv.pdf">Download CV (PDF)</a>
+        <a class="btn btn-ghost" href="https://github.com/" target="_blank">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 — Built with HTML/CSS, hosted on GitHub Pages.</span>
+      <span>Last updated: <span id="lastmod"></span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  document.querySelector('.navtoggle').addEventListener('click', () => {
+    const nl = document.querySelector('.navlinks');
+    nl.style.display = nl.style.display === 'flex' ? 'none' : 'flex';
+    nl.style.flexDirection = 'column';
+    nl.style.position = 'absolute';
+    nl.style.top = '64px'; nl.style.right = '28px';
+    nl.style.background = '#10161C'; nl.style.border = '1px solid #1E2830';
+    nl.style.padding = '16px 20px'; nl.style.gap = '14px';
+  });
+
+  document.getElementById('lastmod').textContent = new Date().toISOString().slice(0,10);
+
+  // Oscilloscope canvas: sine -> SPWM morph, looping
+  const canvas = document.getElementById('scope');
+  const ctx = canvas.getContext('2d');
+  function resize(){
+    canvas.width = canvas.clientWidth * devicePixelRatio;
+    canvas.height = canvas.clientHeight * devicePixelRatio;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let t = 0;
+  function draw(){
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+
+    // grid
+    ctx.strokeStyle = 'rgba(30,40,48,0.6)';
+    ctx.lineWidth = 1;
+    const cols = 12, rows = 4;
+    for(let i=0;i<=cols;i++){ const x=(w/cols)*i; ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+    for(let j=0;j<=rows;j++){ const y=(h/rows)*j; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+
+    // morph factor: cycles between sine (0) and SPWM (1)
+    const cycle = (Math.sin(t*0.15)+1)/2; // 0..1
+    const mid = h/2;
+    const amp = h*0.32;
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#6EF2A6';
+    ctx.lineWidth = 2 * devicePixelRatio;
+    ctx.shadowColor = '#6EF2A6';
+    ctx.shadowBlur = 6;
+
+    const carrierFreq = 40;
+    for(let x=0; x<=w; x+=2){
+      const phase = (x/w)*Math.PI*4 + t*0.06;
+      const sine = Math.sin(phase);
+      const carrier = ((x % (w/carrierFreq)) / (w/carrierFreq)) * 2 - 1;
+      const spwmVal = sine > carrier ? 1 : -1;
+      const y = mid - (sine*(1-cycle) + spwmVal*cycle) * amp;
+      if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    t += 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // scroll-reveal for project cards
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='translateY(0)'; } });
+  }, {threshold:0.1});
+  document.querySelectorAll('.project, .card').forEach(el=>{
+    el.style.opacity=0; el.style.transform='translateY(14px)';
+    el.style.transition='opacity .5s ease, transform .5s ease';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
