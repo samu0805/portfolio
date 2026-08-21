@@ -140,7 +140,7 @@
     max-height:0; overflow:hidden; transition:max-height .35s ease;
     border-top:1px solid transparent;
   }
-  .project.open .project-body{border-top:1px solid var(--line);}
+  .project.open .project-body{border-top:1px solid var(--line); max-height:3000px;}
   .project-body-inner{padding:24px 22px 28px;}
   .pipeline{
     display:flex; flex-wrap:wrap; gap:0; margin-bottom:24px;
@@ -182,8 +182,26 @@
   .card.placeholder p{color:var(--text-faint); font-style:italic;}
   @media (max-width:700px){.cardgrid{grid-template-columns:1fr;}}
 
-  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start;}
-  .about-text p{color:var(--text-dim); font-size:15.5px; margin-bottom:16px; max-width:520px;}
+  .about-grid{display:grid; grid-template-columns:200px 1.15fr 1fr; gap:40px; align-items:start;}
+  .profile-col{display:flex; flex-direction:column; align-items:center; gap:12px;}
+  .profile-photo{
+    width:100%; aspect-ratio:1/1; border:1px solid var(--line); border-radius:4px;
+    overflow:hidden; position:relative; background:var(--panel);
+  }
+  .profile-photo img{width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05) brightness(0.95); display:block;}
+  .profile-photo::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(160deg, rgba(110,242,166,0.20), rgba(10,14,18,0.05) 60%);
+    mix-blend-mode:screen;
+  }
+  .profile-photo.img-missing img{display:none;}
+  .img-missing-note{
+    display:none; position:absolute; inset:0; align-items:center; justify-content:center;
+    text-align:center; font-size:10.5px; color:var(--text-faint); line-height:1.6; padding:12px;
+  }
+  .profile-photo.img-missing .img-missing-note{display:flex;}
+  .profile-caption{font-size:11px; color:var(--text-faint); text-align:center; letter-spacing:1px;}
+  .about-text p{color:var(--text-dim); font-size:15.5px; margin-bottom:16px;}
   .about-text strong{color:var(--text); font-weight:600;}
   .trajectory{border-left:1px solid var(--line); padding-left:24px;}
   .traj-item{margin-bottom:22px; position:relative;}
@@ -193,7 +211,7 @@
   }
   .traj-k{font-family:'IBM Plex Mono'; font-size:11px; color:var(--trace); letter-spacing:1px;}
   .traj-v{font-size:14.5px; color:var(--text-dim); margin-top:3px;}
-  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr; }  .profile-col{flex-direction:row; justify-content:flex-start;} .profile-photo{width:120px; flex-shrink:0;}}
 
   footer{padding:64px 0 48px;}
   .footer-top{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:40px;}
@@ -216,12 +234,12 @@
 <header>
   <div class="wrap">
     <nav>
-      <div class="logo">SAMUEL<span class="dot">.</span>DEV</div>
+      <div class="logo">SAMUEL GRANADOS</div>
       <div class="navlinks">
+        <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#embedded">Embedded</a>
         <a href="#power">Power &amp; Energy</a>
-        <a href="#about">About</a>
         <a href="#cv">CV</a>
       </div>
       <button class="navtoggle mono">MENU</button>
@@ -252,11 +270,58 @@
   </div>
 </section>
 
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label mono">01 — Who's Behind This</div>
+        <div class="sec-title">About</div>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="profile-col">
+        <div class="profile-photo">
+          <img src="profile.jpg" alt="Samuel Granados" onerror="this.parentElement.classList.add('img-missing')">
+          <div class="img-missing-note mono">profile.jpg<br>not found yet</div>
+        </div>
+        <div class="profile-caption mono">SAMUEL GRANADOS<br>Monterrey, N.L.</div>
+      </div>
+      <div class="about-text">
+        <p>I'm an electronics engineering student at <strong>Tecnológico de Monterrey</strong> (GPA 3.8/4.0, Full Academic Leadership Scholarship), specializing in <strong>hardware design and power electronics</strong>. I'm heading to <strong>HKUST</strong> for an exchange semester in Fall 2026.</p>
+        <p>Most of what's on this site comes from working inside real engineering teams — validating firmware at Carrier, leading power electronics for RoBorregos' competition robot, and building circuits with industry sponsors like Bendix, DIRAM, OPmobility, and Acuity Brands.</p>
+        <p>Outside the lab, I lead as <strong>Director of Finance for RoBorregos</strong>, managing a $700K+ MXN budget and securing $400K+ MXN in sponsorships for national and international competitions. I was also selected as the first fully sponsored student for the <strong>PLEI Asia Mission</strong>, an international business and leadership program conducting market research across China, Taiwan, Indonesia, Thailand, Malaysia, and Vietnam.</p>
+      </div>
+      <div class="trajectory">
+        <div class="traj-item">
+          <div class="traj-k mono">FOUNDATION</div>
+          <div class="traj-v">B.S. Electronics Engineering — Tecnológico de Monterrey (Expected Dec 2027)</div>
+        </div>
+        <div class="traj-item">
+          <div class="traj-k mono">EMBEDDED</div>
+          <div class="traj-v">Two internships at Carrier — validation automation, then embedded test &amp; controls</div>
+        </div>
+        <div class="traj-item">
+          <div class="traj-k mono">POWER</div>
+          <div class="traj-v">3-phase motor inverter, RoBorregos BMS (1st place), DIRAM PID, Bendix magnetics</div>
+        </div>
+        <div class="traj-item">
+          <div class="traj-k mono">LEADERSHIP</div>
+          <div class="traj-v">Director of Finance, RoBorregos · PLEI Asia Mission (selected member)</div>
+        </div>
+        <div class="traj-item">
+          <div class="traj-k mono">NEXT</div>
+          <div class="traj-v">HKUST exchange, Fall 2026 — deeper into power converters &amp; energy systems</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="projects">
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="sec-label mono">01 — Selected Work</div>
+        <div class="sec-label mono">02 — Selected Work</div>
         <div class="sec-title">Projects</div>
       </div>
       <div class="sec-note">Each entry documents the full path: problem → objective → design → hardware → software → PCB → test → results.</div>
@@ -510,7 +575,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="sec-label mono">02 — Firmware / Hardware</div>
+        <div class="sec-label mono">03 — Firmware / Hardware</div>
         <div class="sec-title">Electronics &amp; Embedded</div>
       </div>
       <div class="sec-note">Microcontrollers, protocols, and validation tooling from internships and coursework.</div>
@@ -544,7 +609,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="sec-label mono">03 — Where This Is Heading</div>
+        <div class="sec-label mono">04 — Where This Is Heading</div>
         <div class="sec-title">Power &amp; Energy Systems</div>
       </div>
       <div class="sec-note">Power electronics and magnetics work, with energy systems as the next step.</div>
@@ -569,46 +634,6 @@
         <div class="card-icon mono">[GRID]</div>
         <h3>Grid-Facing Power Electronics</h3>
         <p>Placeholder — power factor correction, inverter design, or converter work aimed at larger energy systems.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="sec-label mono">04 — Who's Behind This</div>
-        <div class="sec-title">About</div>
-      </div>
-    </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>I'm an electronics engineering student at <strong>Tecnológico de Monterrey</strong> (GPA 3.8/4.0, Full Academic Leadership Scholarship), specializing in <strong>hardware design and power electronics</strong>. I'm heading to <strong>HKUST</strong> for an exchange semester in Fall 2026.</p>
-        <p>Most of what's on this site comes from working inside real engineering teams — validating firmware at Carrier, leading power electronics for RoBorregos' competition robot, and building circuits with industry sponsors like Bendix, DIRAM, OPmobility, and Acuity Brands.</p>
-        <p>Outside the lab, I lead as <strong>Director of Finance for RoBorregos</strong>, managing a $700K+ MXN budget and securing $400K+ MXN in sponsorships for national and international competitions. I was also selected as the first fully sponsored student for the <strong>PLEI Asia Mission</strong>, an international business and leadership program conducting market research across China, Taiwan, Indonesia, Thailand, Malaysia, and Vietnam.</p>
-      </div>
-      <div class="trajectory">
-        <div class="traj-item">
-          <div class="traj-k mono">FOUNDATION</div>
-          <div class="traj-v">B.S. Electronics Engineering — Tecnológico de Monterrey (Expected Dec 2027)</div>
-        </div>
-        <div class="traj-item">
-          <div class="traj-k mono">EMBEDDED</div>
-          <div class="traj-v">Two internships at Carrier — validation automation, then embedded test &amp; controls</div>
-        </div>
-        <div class="traj-item">
-          <div class="traj-k mono">POWER</div>
-          <div class="traj-v">3-phase motor inverter, RoBorregos BMS (1st place), DIRAM PID, Bendix magnetics</div>
-        </div>
-        <div class="traj-item">
-          <div class="traj-k mono">LEADERSHIP</div>
-          <div class="traj-v">Director of Finance, RoBorregos · PLEI Asia Mission (selected member)</div>
-        </div>
-        <div class="traj-item">
-          <div class="traj-k mono">NEXT</div>
-          <div class="traj-v">HKUST exchange, Fall 2026 — deeper into power converters &amp; energy systems</div>
-        </div>
       </div>
     </div>
   </div>
