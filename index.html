@@ -268,50 +268,56 @@
         <span class="project-id mono">P.01</span>
         <span class="project-name">Single-Phase to Three-Phase Inverter (Motor Drive)</span>
         <span class="project-tags">
-          <span class="tag">Power Electronics</span>
-          <span class="tag">Motor Control</span>
-          <span class="tag">2026</span>
+          <span class="tag">VFD / V-f Control</span>
+          <span class="tag">STM32</span>
+          <span class="tag">AMI Automation</span>
         </span>
         <span class="project-chevron">+</span>
       </div>
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
-            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>PCB</span><span>TEST</span><span>RESULTS</span>
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>CONTROL LAW</span><span>TEST</span><span>RESULTS</span>
           </div>
           <div class="stage">
             <div class="stage-label">Problem</div>
-            <div class="stage-text">Three-phase motors offer smoother torque and better efficiency than single-phase alternatives, but most available supply points are single-phase only — a common constraint in residential, rural, and small-industrial settings.</div>
+            <div class="stage-text">AMI Automation needed a variable frequency drive (VFD) approach for modernizing industrial motor control — running a three-phase induction motor with adjustable speed from a standard single-phase supply, in line with their process efficiency standards.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Objective</div>
-            <div class="stage-text">Design and build an inverter that takes a single-phase AC input and produces a controlled three-phase output capable of driving a motor.</div>
+            <div class="stage-text">Build a VFD that controls an AC induction motor using scalar V/f control through a two-level Voltage Source Inverter (VSI), keeping the volts-per-hertz ratio constant to preserve motor flux and torque capability across the speed range.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Design</div>
-            <div class="stage-text"><em>[Add: topology used — e.g. rectifier + 6-switch three-phase bridge, modulation strategy (SPWM / SVPWM), switching frequency]</em></div>
+            <div class="stage-text">Single-phase diode-bridge rectifier with capacitor filtering to establish a stable DC bus, feeding a two-level, six-switch three-phase inverter bridge. Three sinusoidal reference signals, phase-shifted 120° apart, are generated in firmware and used to modulate the bridge via S-PWM.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Hardware</div>
-            <div class="stage-text"><em>[Add: power stage components — rectifier, DC bus/capacitor bank, IGBT/MOSFET bridge, gate drivers, motor specs and rated power/voltage]</em></div>
+            <div class="stage-text">Target motor: 2 HP induction motor, nameplate rated 220–230/460 VAC, 60 Hz, 3465 RPM, 80% max efficiency. Diode-bridge rectifier + DC bus capacitors, six-switch inverter bridge (gate signals on PA8–PA10 / PB13–PB15), and a potentiometer feeding the ADC as the speed command input.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Software</div>
-            <div class="stage-text"><em>[Add: control strategy — V/f scalar control, FOC, the MCU used, and how the three-phase reference was generated]</em></div>
+            <div class="stage-text">STM32 (Blackpill) firmware in C using the HAL library. A TIM1 timer interrupt runs every Ts = 100 µs, computing three sinf()-based phase references with a soft-start ramp (0.001→1.0) that gradually scales amplitude on power-up to protect the power stage. Bipolar modulation maps the [-1,1] sine values to the timer's compare range to set duty cycle per channel. Separately, the main loop reads the ADC, maps the 12-bit value to a 5–60 Hz range, and applies a first-order low-pass filter to avoid abrupt frequency jumps that could destabilize the motor.</div>
           </div>
           <div class="stage">
-            <div class="stage-label">PCB</div>
-            <div class="stage-text"><em>[Add: board photos/schematic — power stage layout, isolation approach between control and power sections]</em></div>
+            <div class="stage-label">Control Law</div>
+            <div class="stage-text">For this motor, the target V/f ratio is k = V_nom / f_nom = 220 V / 60 Hz = 3.66 V/Hz — the value the control aims to hold constant so the stator flux (and therefore torque) stays consistent across the operating frequency range.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Test</div>
-            <div class="stage-text"><em>[Add: oscilloscope captures of the three-phase output, motor speed range tested, thermal behavior under load]</em></div>
+            <div class="stage-text">Open-loop bench tests varying modulation index and commanded frequency, measuring both inverter-side (motor) and grid-side (line) voltage, current, and power.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Results &amp; Learnings</div>
-            <div class="stage-text"><em>[Add: final numbers — output voltage/frequency range, efficiency, motor performance achieved]</em></div>
+            <div class="stage-text">At m=0.98 / 36 Hz the inverter delivered 109 V RMS / 1.6 A RMS, driving the motor to 2152 RPM; scaling down to m=0.25 / 9 Hz produced 56 V RMS / 1.1 A RMS at 538 RPM — confirming speed control across the range. Grid-side power factor measured low (0.20–0.26), expected for an uncorrected single-phase rectifier front-end. Critical review of the implementation found the modulation index was held constant per test point rather than scaling continuously with commanded frequency — the fix identified for a fully compliant closed-loop V/f controller in the next iteration.</div>
           </div>
-          <div class="todo-banner">⚠ Send me the topology, control strategy, motor specs, and any test results — I'll fill in the stages above and this banner disappears.</div>
+          <div class="specs">
+            <div><div class="spec-k">Motor</div><div class="spec-v">2 HP / 220V / 60Hz</div></div>
+            <div><div class="spec-k">V/f Ratio</div><div class="spec-v">3.66 V/Hz</div></div>
+            <div><div class="spec-k">Sample Time</div><div class="spec-v">Ts = 100 µs</div></div>
+            <div><div class="spec-k">Max Output</div><div class="spec-v">109 VRMS @ 36Hz</div></div>
+          </div>
+          <div class="todo-banner">Team project (Servicio Social, Análisis de Sistemas Energéticos) with Patricio González Salinas, Ángel Eduardo López Solís &amp; Juan Guillermo Montoya Oviedo — for AMI Automation. Send PCB/board photos or scope captures if you have them and I'll drop them in.</div>
         </div>
       </div>
     </div>
