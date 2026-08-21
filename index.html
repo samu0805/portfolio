@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dominick — Electronics & Power Systems</title>
-<meta name="description" content="Electronics engineer specializing in power electronics, embedded systems, and energy systems.">
+<title>Samuel Granados — Electronics & Power Systems</title>
+<meta name="description" content="Electronics engineer specializing in power electronics, embedded systems, and hardware validation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -36,7 +36,6 @@
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
 
-  /* background PCB grid */
   body{
     background-image:
       linear-gradient(var(--line-soft) 1px, transparent 1px),
@@ -47,7 +46,6 @@
 
   .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
 
-  /* NAV */
   header{
     position:sticky; top:0; z-index:50;
     background:rgba(10,14,18,0.86);
@@ -67,7 +65,6 @@
   .navlinks a:hover::after{width:100%;}
   .navtoggle{display:none; background:none; border:1px solid var(--line); color:var(--text); font-family:'IBM Plex Mono'; padding:6px 10px; font-size:12px; border-radius:2px;}
 
-  /* HERO */
   .hero{
     padding:96px 0 72px;
     border-bottom:1px solid var(--line);
@@ -81,13 +78,13 @@
   }
   .eyebrow::before{content:''; width:22px; height:1px; background:var(--trace-dim);}
   .hero h1{
-    font-size:clamp(34px, 6vw, 64px);
-    font-weight:600; letter-spacing:-1px; line-height:1.06;
+    font-size:clamp(34px, 6vw, 60px);
+    font-weight:600; letter-spacing:-1px; line-height:1.08;
     max-width:820px;
   }
   .hero h1 .accent{color:var(--trace);}
   .hero p.lead{
-    margin-top:22px; max-width:560px; color:var(--text-dim); font-size:17px;
+    margin-top:22px; max-width:580px; color:var(--text-dim); font-size:17px;
   }
   .hero-scope{
     margin-top:44px;
@@ -114,14 +111,12 @@
   .btn-ghost{color:var(--text); border-color:var(--line);}
   .btn-ghost:hover{border-color:var(--trace-dim); color:var(--trace);}
 
-  /* SECTION shared */
   section{padding:80px 0; border-bottom:1px solid var(--line);}
   .sec-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; gap:20px; flex-wrap:wrap;}
   .sec-label{font-family:'IBM Plex Mono'; font-size:12px; color:var(--trace); letter-spacing:2px; text-transform:uppercase;}
   .sec-title{font-size:clamp(24px,3.4vw,36px); font-weight:600; margin-top:8px; letter-spacing:-0.5px;}
-  .sec-note{font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-faint); max-width:260px; text-align:right;}
+  .sec-note{font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-faint); max-width:280px; text-align:right;}
 
-  /* PROJECTS */
   .project{
     border:1px solid var(--line); background:var(--panel);
     border-radius:4px; margin-bottom:20px; overflow:hidden;
@@ -132,7 +127,7 @@
   }
   .project-top:hover{background:var(--panel-2);}
   .project-id{font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-faint); min-width:52px;}
-  .project-name{font-size:19px; font-weight:600; flex:1;}
+  .project-name{font-size:18px; font-weight:600; flex:1;}
   .project-tags{display:flex; gap:8px; flex-wrap:wrap;}
   .tag{
     font-family:'IBM Plex Mono'; font-size:10.5px; color:var(--trace);
@@ -154,24 +149,26 @@
   .pipeline span{padding:5px 10px; border:1px solid var(--line-soft); border-right:none;}
   .pipeline span:last-child{border-right:1px solid var(--line-soft);}
   .stage{
-    display:grid; grid-template-columns:120px 1fr; gap:18px; padding:14px 0;
+    display:grid; grid-template-columns:130px 1fr; gap:18px; padding:14px 0;
     border-top:1px solid var(--line-soft);
   }
   .stage:first-of-type{border-top:none;}
   .stage-label{font-family:'IBM Plex Mono'; font-size:11px; color:var(--trace); letter-spacing:1px; text-transform:uppercase; padding-top:2px;}
   .stage-text{color:var(--text-dim); font-size:14.5px;}
+  .stage-text em{color:var(--text-faint); font-style:italic;}
   .specs{
     display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:14px;
     margin-top:22px; padding-top:20px; border-top:1px solid var(--line-soft);
   }
   .spec-k{font-family:'IBM Plex Mono'; font-size:10px; color:var(--text-faint); text-transform:uppercase;}
   .spec-v{font-family:'IBM Plex Mono'; font-size:15px; color:var(--amber); margin-top:4px;}
-
-  @media (max-width:640px){
-    .stage{grid-template-columns:1fr;}
+  .todo-banner{
+    margin-top:18px; padding:12px 14px; border:1px dashed var(--amber);
+    border-radius:3px; font-family:'IBM Plex Mono'; font-size:11.5px; color:var(--amber);
   }
 
-  /* GRID CARDS (embedded / power) */
+  @media (max-width:640px){ .stage{grid-template-columns:1fr;} }
+
   .cardgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
   .card{
     border:1px solid var(--line); background:var(--panel); border-radius:4px;
@@ -185,7 +182,6 @@
   .card.placeholder p{color:var(--text-faint); font-style:italic;}
   @media (max-width:700px){.cardgrid{grid-template-columns:1fr;}}
 
-  /* ABOUT */
   .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start;}
   .about-text p{color:var(--text-dim); font-size:15.5px; margin-bottom:16px; max-width:520px;}
   .about-text strong{color:var(--text); font-weight:600;}
@@ -199,7 +195,6 @@
   .traj-v{font-size:14.5px; color:var(--text-dim); margin-top:3px;}
   @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
 
-  /* FOOTER / CV */
   footer{padding:64px 0 48px;}
   .footer-top{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:40px;}
   .footer-cta h2{font-size:clamp(22px,3vw,30px); font-weight:600;}
@@ -221,7 +216,7 @@
 <header>
   <div class="wrap">
     <nav>
-      <div class="logo">DOMINICK<span class="dot">.</span>DEV</div>
+      <div class="logo">SAMUEL<span class="dot">.</span>DEV</div>
       <div class="navlinks">
         <a href="#projects">Projects</a>
         <a href="#embedded">Embedded</a>
@@ -237,22 +232,22 @@
 <section class="hero">
   <div class="wrap">
     <div class="eyebrow mono">Electronics · Embedded · Power</div>
-    <h1>Building the circuits that <span class="accent">move energy</span> — from silicon to the grid.</h1>
-    <p class="lead">Electronics engineering student specializing in power electronics and hardware design. I design, build, and measure real systems — controllers, converters, and the boards underneath them.</p>
+    <h1>Building the circuits that <span class="accent">move energy</span> — from silicon to the motor shaft.</h1>
+    <p class="lead">Electronics engineering student at Tecnológico de Monterrey specializing in hardware design and power electronics. I design, validate, and test real systems — from firmware shields to power inverters — and I've done it inside industry teams, not just the lab.</p>
 
     <div class="hero-scope">
       <div class="scope-head">
-        <span><span class="ch">●</span> CH1 — SPWM OUTPUT</span>
-        <span>0–24 VAC · 50Hz TIMEBASE</span>
+        <span><span class="ch">●</span> CH1 — 3-PHASE INVERTER OUTPUT</span>
+        <span>MOTOR DRIVE · TIMEBASE</span>
       </div>
       <canvas id="scope"></canvas>
     </div>
 
     <div class="hero-actions">
       <a class="btn btn-primary" href="#projects">View Projects →</a>
-      <a class="btn btn-ghost" href="cv.pdf">Download CV</a>
-      <a class="btn btn-ghost" href="https://github.com/" target="_blank">GitHub</a>
-      <a class="btn btn-ghost" href="https://linkedin.com/" target="_blank">LinkedIn</a>
+      <a class="btn btn-ghost" href="CV.pdf">Download CV</a>
+      <a class="btn btn-ghost" href="https://github.com/samu0805" target="_blank">GitHub</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/samuel-granados" target="_blank">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -267,15 +262,15 @@
       <div class="sec-note">Each entry documents the full path: problem → objective → design → hardware → software → PCB → test → results.</div>
     </div>
 
-    <!-- PROJECT 1 -->
+    <!-- PROJECT 1: INVERTER -->
     <div class="project open">
       <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
         <span class="project-id mono">P.01</span>
-        <span class="project-name">0–24 VAC SPWM Controller (STM32)</span>
+        <span class="project-name">Single-Phase to Three-Phase Inverter (Motor Drive)</span>
         <span class="project-tags">
-          <span class="tag">STM32</span>
-          <span class="tag">SPWM</span>
-          <span class="tag">Isolation</span>
+          <span class="tag">Power Electronics</span>
+          <span class="tag">Motor Control</span>
+          <span class="tag">2026</span>
         </span>
         <span class="project-chevron">+</span>
       </div>
@@ -284,54 +279,94 @@
           <div class="pipeline">
             <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>PCB</span><span>TEST</span><span>RESULTS</span>
           </div>
-
           <div class="stage">
             <div class="stage-label">Problem</div>
-            <div class="stage-text">Most bench AC sources for testing low-voltage loads are bulky, expensive, or lack fine amplitude control. A compact, digitally controlled source was needed for lab and prototype validation work.</div>
+            <div class="stage-text">Three-phase motors offer smoother torque and better efficiency than single-phase alternatives, but most available supply points are single-phase only — a common constraint in residential, rural, and small-industrial settings.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Objective</div>
-            <div class="stage-text">Design a solid-state controller producing a variable AC output from 0–24 V, with adjustable frequency and clean sinusoidal shaping via SPWM.</div>
+            <div class="stage-text">Design and build an inverter that takes a single-phase AC input and produces a controlled three-phase output capable of driving a motor.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Design</div>
-            <div class="stage-text">Full-bridge topology driven by an STM32 timer-generated SPWM pattern, LC output filter to reconstruct the sine wave, and galvanic isolation between control and power stages.</div>
+            <div class="stage-text"><em>[Add: topology used — e.g. rectifier + 6-switch three-phase bridge, modulation strategy (SPWM / SVPWM), switching frequency]</em></div>
           </div>
           <div class="stage">
             <div class="stage-label">Hardware</div>
-            <div class="stage-text">Gate driver stage, H-bridge MOSFETs, gate isolation transformers, LC filter sized for the target frequency band, and protection circuitry for overcurrent conditions.</div>
+            <div class="stage-text"><em>[Add: power stage components — rectifier, DC bus/capacitor bank, IGBT/MOSFET bridge, gate drivers, motor specs and rated power/voltage]</em></div>
           </div>
           <div class="stage">
             <div class="stage-label">Software</div>
-            <div class="stage-text">STM32 firmware generating a lookup-table-based sine reference, timer PWM peripheral configured for the switching frequency, and a simple UART interface for amplitude/frequency commands.</div>
+            <div class="stage-text"><em>[Add: control strategy — V/f scalar control, FOC, the MCU used, and how the three-phase reference was generated]</em></div>
           </div>
           <div class="stage">
             <div class="stage-label">PCB</div>
-            <div class="stage-text">Two-stage board: isolated low-power control section and high-current power section, with careful trace width and creepage/clearance for the isolation barrier. <em style="color:var(--text-faint)">[schematic + layout images go here]</em></div>
+            <div class="stage-text"><em>[Add: board photos/schematic — power stage layout, isolation approach between control and power sections]</em></div>
           </div>
           <div class="stage">
             <div class="stage-label">Test</div>
-            <div class="stage-text">Oscilloscope verification of SPWM switching, output waveform THD measurement after filtering, and thermal checks under sustained load. <em style="color:var(--text-faint)">[scope captures go here]</em></div>
+            <div class="stage-text"><em>[Add: oscilloscope captures of the three-phase output, motor speed range tested, thermal behavior under load]</em></div>
           </div>
           <div class="stage">
             <div class="stage-label">Results &amp; Learnings</div>
-            <div class="stage-text">Achieved a clean, adjustable 0–24 VAC output with low distortion; refined filter sizing and gate isolation approach through iteration. <em style="color:var(--text-faint)">[add final numbers: THD %, efficiency, settling time]</em></div>
+            <div class="stage-text"><em>[Add: final numbers — output voltage/frequency range, efficiency, motor performance achieved]</em></div>
           </div>
+          <div class="todo-banner">⚠ Send me the topology, control strategy, motor specs, and any test results — I'll fill in the stages above and this banner disappears.</div>
+        </div>
+      </div>
+    </div>
 
+    <!-- PROJECT 2: CARRIER SHIELD -->
+    <div class="project">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.02</span>
+        <span class="project-name">STM32H563ZI Test Shield — Carrier</span>
+        <span class="project-tags">
+          <span class="tag">STM32</span>
+          <span class="tag">FreeRTOS</span>
+          <span class="tag">Altium</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>RESULTS</span>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Problem</div>
+            <div class="stage-text">Validating embedded firmware against real residential HVAC sensor behavior normally requires physical field hardware, which slows down the test cycle for the Software &amp; Controls team.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Objective</div>
+            <div class="stage-text">Build a shield that replicates residential AC external sensor inputs — including 24VAC and PWM signal generation — so firmware can be validated on the bench.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Design &amp; Hardware</div>
+            <div class="stage-text">Designed a custom Altium shield for the STM32H563ZI, with circuitry to generate 24VAC and PWM signals that emulate the electrical behavior of real field sensors.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Software</div>
+            <div class="stage-text">Firmware built on FreeRTOS, structuring signal generation and monitoring as concurrent tasks to mirror real-time field conditions.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results</div>
+            <div class="stage-text">Gave the Independent Test &amp; Validation team a repeatable bench setup to validate firmware behavior without needing physical field rigs. <em>[add specific validation coverage / time saved if available]</em></div>
+          </div>
           <div class="specs">
-            <div><div class="spec-k">Output</div><div class="spec-v">0–24 VAC</div></div>
-            <div><div class="spec-k">Control</div><div class="spec-v">STM32 / SPWM</div></div>
-            <div><div class="spec-k">Topology</div><div class="spec-v">Full-Bridge</div></div>
-            <div><div class="spec-k">Isolation</div><div class="spec-v">Galvanic</div></div>
+            <div><div class="spec-k">MCU</div><div class="spec-v">STM32H563ZI</div></div>
+            <div><div class="spec-k">RTOS</div><div class="spec-v">FreeRTOS</div></div>
+            <div><div class="spec-k">Signals</div><div class="spec-v">24VAC / PWM</div></div>
+            <div><div class="spec-k">Team</div><div class="spec-v">Carrier — S&amp;C CoE</div></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 2 -->
+    <!-- PROJECT 3: ROBORREGOS BMS -->
     <div class="project">
       <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
-        <span class="project-id mono">P.02</span>
+        <span class="project-id mono">P.03</span>
         <span class="project-name">1200W Power Distribution &amp; BMS — RoBorregos</span>
         <span class="project-tags">
           <span class="tag">BMS</span>
@@ -343,70 +378,120 @@
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
-            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>PCB</span><span>TEST</span><span>RESULTS</span>
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>RESULTS</span>
           </div>
           <div class="stage">
             <div class="stage-label">Problem</div>
-            <div class="stage-text">Competition robotics platforms draw high, variable current across multiple subsystems, and cell-level battery mismanagement risked downtime or damage during matches.</div>
+            <div class="stage-text">The @HOME League competition robot draws high, variable current across multiple subsystems, and unmanaged battery charging risked mid-match failures.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Objective</div>
-            <div class="stage-text">Deliver a reliable 1200 W power distribution architecture with active battery management, protecting the pack while supplying every subsystem cleanly.</div>
+            <div class="stage-text">Lead the electronic design of a reliable 1200W power distribution and battery charging system for the national and international competition robot.</div>
           </div>
           <div class="stage">
-            <div class="stage-label">Design / Hardware / PCB</div>
-            <div class="stage-text">Multi-rail distribution board with per-channel protection, paired with a custom BMS handling cell balancing, voltage/temperature monitoring, and fault cutoff. <em style="color:var(--text-faint)">[add schematic + board photos]</em></div>
+            <div class="stage-label">Design &amp; Hardware</div>
+            <div class="stage-text">Modified and integrated a custom BMS with a multi-rail power distribution board, working within an 8-engineer team to coordinate subsystem power budgets. <em>[add schematic + board photos]</em></div>
           </div>
           <div class="stage">
             <div class="stage-label">Results</div>
-            <div class="stage-text">Team placed 1st nationally; the power system ran without a single battery-related failure across the competition. <em style="color:var(--text-faint)">[add specific reliability/uptime data]</em></div>
+            <div class="stage-text">The system earned 1st Place Nationally at the Mexican Tournament of Robotics (April 2026), running reliably across the competition. <em>[add uptime/reliability data if available]</em></div>
           </div>
           <div class="specs">
             <div><div class="spec-k">Power</div><div class="spec-v">1200 W</div></div>
             <div><div class="spec-k">Result</div><div class="spec-v">1st — National</div></div>
-            <div><div class="spec-k">Team</div><div class="spec-v">RoBorregos</div></div>
+            <div><div class="spec-k">Role</div><div class="spec-v">Electronics PM</div></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 3 -->
+    <!-- PROJECT 4: DIRAM PID -->
     <div class="project">
       <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
-        <span class="project-id mono">P.03</span>
-        <span class="project-name">Custom Inductor Design — Bendix (COMSOL)</span>
+        <span class="project-id mono">P.04</span>
+        <span class="project-name">PID-Based Position Control — DIRAM</span>
         <span class="project-tags">
-          <span class="tag">Magnetics</span>
-          <span class="tag">COMSOL</span>
-          <span class="tag">Simulation</span>
+          <span class="tag">PID</span>
+          <span class="tag">Controls</span>
+          <span class="tag">Industrial</span>
         </span>
         <span class="project-chevron">+</span>
       </div>
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
-            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>SIMULATION</span><span>RESULTS</span>
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>TEST</span><span>RESULTS</span>
           </div>
           <div class="stage">
             <div class="stage-label">Problem</div>
-            <div class="stage-text">An off-the-shelf inductor didn't meet the size, saturation current, and loss targets required for the application.</div>
+            <div class="stage-text">An industrial process required a position control system meeting specific performance criteria — accuracy and response speed the open-loop approach couldn't deliver.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Objective</div>
-            <div class="stage-text">Design a custom inductor — core geometry, winding, and material — validated by electromagnetic simulation before physical build.</div>
+            <div class="stage-text">Develop and tune a PID-based closed-loop control system to meet DIRAM's industrial performance targets.</div>
           </div>
           <div class="stage">
-            <div class="stage-label">Design &amp; Simulation</div>
-            <div class="stage-text">Used COMSOL Multiphysics to model core saturation, winding losses, and thermal behavior across candidate geometries, iterating toward a design meeting the target inductance and current rating. <em style="color:var(--text-faint)">[add simulation plots]</em></div>
+            <div class="stage-label">Design</div>
+            <div class="stage-text"><em>[Add: plant/actuator description, sensor used for position feedback, tuning method — Ziegler-Nichols, manual, or software-assisted]</em></div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Test</div>
+            <div class="stage-text">Analyzed system step response to validate settling time, overshoot, and steady-state accuracy against DIRAM's criteria. <em>[add response plots if available]</em></div>
           </div>
           <div class="stage">
             <div class="stage-label">Results</div>
-            <div class="stage-text">Converged on a geometry meeting saturation and loss targets within the available footprint. <em style="color:var(--text-faint)">[add final spec numbers]</em></div>
+            <div class="stage-text">Tuned controller met the required industrial performance criteria. <em>[add final settling time / overshoot / accuracy numbers]</em></div>
           </div>
           <div class="specs">
-            <div><div class="spec-k">Tool</div><div class="spec-v">COMSOL</div></div>
-            <div><div class="spec-k">Domain</div><div class="spec-v">Magnetics</div></div>
-            <div><div class="spec-k">Partner</div><div class="spec-v">Bendix</div></div>
+            <div><div class="spec-k">Control</div><div class="spec-v">PID</div></div>
+            <div><div class="spec-k">Type</div><div class="spec-v">Position</div></div>
+            <div><div class="spec-k">Partner</div><div class="spec-v">DIRAM</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 5: OPMOBILITY -->
+    <div class="project">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.05</span>
+        <span class="project-name">Automotive Lighting Protection System — OPmobility</span>
+        <span class="project-tags">
+          <span class="tag">PIC18</span>
+          <span class="tag">Fault Detection</span>
+          <span class="tag">Automotive</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>TEST</span><span>RESULTS</span>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Problem</div>
+            <div class="stage-text">Automotive lighting circuits need to detect fault conditions (shorts, opens) quickly to protect both the circuit and the vehicle's electrical system.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Objective</div>
+            <div class="stage-text">Design a protection and control system for automotive lighting with reliable fault detection built in.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Design</div>
+            <div class="stage-text">Built around a PIC18 microcontroller, using mirror-current sensing to detect fault conditions and trigger protective action without added external sensors.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Test</div>
+            <div class="stage-text">Validated the system against simulated fault scenarios using the mirror-current readings to confirm correct fault detection. <em>[add specific fault scenarios tested]</em></div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results</div>
+            <div class="stage-text">System correctly identified fault conditions using mirror currents, meeting OPmobility's validation criteria. <em>[add final validation numbers]</em></div>
+          </div>
+          <div class="specs">
+            <div><div class="spec-k">MCU</div><div class="spec-v">PIC18</div></div>
+            <div><div class="spec-k">Sensing</div><div class="spec-v">Mirror Current</div></div>
+            <div><div class="spec-k">Partner</div><div class="spec-v">OPmobility</div></div>
           </div>
         </div>
       </div>
@@ -422,28 +507,28 @@
         <div class="sec-label mono">02 — Firmware / Hardware</div>
         <div class="sec-title">Electronics &amp; Embedded</div>
       </div>
-      <div class="sec-note">Microcontrollers, sensor integration, and the boards that hold it all together.</div>
+      <div class="sec-note">Microcontrollers, protocols, and validation tooling from internships and coursework.</div>
     </div>
     <div class="cardgrid">
       <div class="card">
-        <div class="card-icon mono">[MCU]</div>
-        <h3>STM32 Firmware</h3>
-        <p>Timer-driven PWM/SPWM generation, peripheral configuration, and UART control interfaces built for the 0–24 VAC controller and related bench tools.</p>
+        <div class="card-icon mono">[MUX]</div>
+        <h3>RS-485 Multiplexer — Carrier</h3>
+        <p>Custom Altium PCB using an ATmega328 and DG409 analog multiplexer, paired with a C# GUI to evaluate real-time data from boards sharing the same address.</p>
       </div>
       <div class="card">
-        <div class="card-icon mono">[PCB]</div>
-        <h3>PCB Design &amp; Validation</h3>
-        <p>Schematic capture through fabrication, plus hands-on validation experience from a PCB validation internship at Carrier.</p>
+        <div class="card-icon mono">[RCA]</div>
+        <h3>PCB Root Cause Analysis — Carrier</h3>
+        <p>Diagnosed and resolved PCB failures that had gone unsolved for over a year, proposing component and design changes and replicating legacy failure modes.</p>
       </div>
-      <div class="card placeholder">
-        <div class="card-icon mono">[SNS]</div>
-        <h3>Sensor Integration</h3>
-        <p>Add a project here — e.g. sensor front-ends, signal conditioning, or a small ESP32-based data logger.</p>
+      <div class="card">
+        <div class="card-icon mono">[TEL]</div>
+        <h3>Vehicle Telemetry — EcoShell Tec Racing</h3>
+        <p>Built a telemetry system over UART and I2C with ESP32, enabling real-time vehicle status acquisition and post-run data analysis in MATLAB.</p>
       </div>
-      <div class="card placeholder">
-        <div class="card-icon mono">[NANO]</div>
-        <h3>Micro/Nano Fabrication</h3>
-        <p>MIT NanoLab certificate in micro/nano production — worth a short writeup on what was fabricated and measured.</p>
+      <div class="card">
+        <div class="card-icon mono">[AMP]</div>
+        <h3>Analog Signal Conditioning — Acuity Brands</h3>
+        <p>Op-amp based conditioning circuit to control a motor-driven window blind — no embedded firmware, just gain, filtering, and stability design.</p>
       </div>
     </div>
   </div>
@@ -456,28 +541,28 @@
         <div class="sec-label mono">03 — Where This Is Heading</div>
         <div class="sec-title">Power &amp; Energy Systems</div>
       </div>
-      <div class="sec-note">Power electronics, battery energy storage, and grid-facing systems.</div>
+      <div class="sec-note">Power electronics and magnetics work, with energy systems as the next step.</div>
     </div>
     <div class="cardgrid">
       <div class="card">
-        <div class="card-icon mono">[PID]</div>
-        <h3>PID Control — DIRAM</h3>
-        <p>Closed-loop control work applied to a real industrial process, tuning for stability and response under load.</p>
+        <div class="card-icon mono">[IND]</div>
+        <h3>Custom Inductor — Bendix (COMSOL)</h3>
+        <p>Designed and simulated a custom inductor in COMSOL Multiphysics, optimizing magnetic performance and validating constraints with Bendix engineers.</p>
       </div>
       <div class="card">
-        <div class="card-icon mono">[VAC]</div>
-        <h3>SPWM Power Stage</h3>
-        <p>The 0–24 VAC controller doubles as a power-electronics case study: switching, filtering, and isolation design in one board.</p>
+        <div class="card-icon mono">[INV]</div>
+        <h3>3-Phase Motor Inverter</h3>
+        <p>See Project P.01 above — a single-phase to three-phase inverter built this semester, the most direct power-electronics case study on this site so far.</p>
       </div>
       <div class="card placeholder">
         <div class="card-icon mono">[BESS]</div>
         <h3>Battery Energy Storage (BESS)</h3>
-        <p>Placeholder — a project or analysis around IEC 62619/62933-aligned BESS design under Mexico's 2026 CNE/CENACE framework.</p>
+        <p>Placeholder — a future project or analysis around energy storage design.</p>
       </div>
       <div class="card placeholder">
         <div class="card-icon mono">[GRID]</div>
         <h3>Grid-Facing Power Electronics</h3>
-        <p>Placeholder — power factor correction, inverter design, or converter work aimed at energy-system applications.</p>
+        <p>Placeholder — power factor correction, inverter design, or converter work aimed at larger energy systems.</p>
       </div>
     </div>
   </div>
@@ -493,26 +578,30 @@
     </div>
     <div class="about-grid">
       <div class="about-text">
-        <p>I'm an electronics engineering student focused on <strong>power electronics and hardware design</strong> — the layer between control theory and the physical circuit that has to actually survive current, heat, and noise.</p>
-        <p>My work moves along one line: <strong>Electronics → Embedded Systems → Power Electronics → Energy Systems</strong>. Each project on this site is a step further into that specialization, from firmware and PCB layout toward converters, BMS design, and grid-facing power systems.</p>
-        <p>I'm currently exploring how that specialization applies to real energy infrastructure — battery storage, power quality, and the regulatory frameworks shaping how power electronics gets deployed at scale.</p>
+        <p>I'm an electronics engineering student at <strong>Tecnológico de Monterrey</strong> (GPA 3.8/4.0, Full Academic Leadership Scholarship), specializing in <strong>hardware design and power electronics</strong>. I'm heading to <strong>HKUST</strong> for an exchange semester in Fall 2026.</p>
+        <p>Most of what's on this site comes from working inside real engineering teams — validating firmware at Carrier, leading power electronics for RoBorregos' competition robot, and building circuits with industry sponsors like Bendix, DIRAM, OPmobility, and Acuity Brands.</p>
+        <p>Outside the lab, I lead as <strong>Director of Finance for RoBorregos</strong>, managing a $700K+ MXN budget and securing $400K+ MXN in sponsorships for national and international competitions. I was also selected as the first fully sponsored student for the <strong>PLEI Asia Mission</strong>, an international business and leadership program conducting market research across China, Taiwan, Indonesia, Thailand, Malaysia, and Vietnam.</p>
       </div>
       <div class="trajectory">
         <div class="traj-item">
           <div class="traj-k mono">FOUNDATION</div>
-          <div class="traj-v">Electronics engineering, business engineering minor — Tecnológico de Monterrey</div>
+          <div class="traj-v">B.S. Electronics Engineering — Tecnológico de Monterrey (Expected Dec 2027)</div>
         </div>
         <div class="traj-item">
           <div class="traj-k mono">EMBEDDED</div>
-          <div class="traj-v">STM32 firmware, PCB design &amp; validation (Carrier), MIT NanoLab certificate</div>
+          <div class="traj-v">Two internships at Carrier — validation automation, then embedded test &amp; controls</div>
         </div>
         <div class="traj-item">
           <div class="traj-k mono">POWER</div>
-          <div class="traj-v">SPWM AC controller, custom magnetics with Bendix (COMSOL), 1200W BMS (RoBorregos)</div>
+          <div class="traj-v">3-phase motor inverter, RoBorregos BMS (1st place), DIRAM PID, Bendix magnetics</div>
+        </div>
+        <div class="traj-item">
+          <div class="traj-k mono">LEADERSHIP</div>
+          <div class="traj-v">Director of Finance, RoBorregos · PLEI Asia Mission (selected member)</div>
         </div>
         <div class="traj-item">
           <div class="traj-k mono">NEXT</div>
-          <div class="traj-v">Energy systems — BESS, power quality, grid-facing converters</div>
+          <div class="traj-v">HKUST exchange, Fall 2026 — deeper into power converters &amp; energy systems</div>
         </div>
       </div>
     </div>
@@ -527,9 +616,9 @@
         <p>CV, code, and contact — all one click away.</p>
       </div>
       <div class="foot-links">
-        <a class="btn btn-primary" href="cv.pdf">Download CV (PDF)</a>
-        <a class="btn btn-ghost" href="https://github.com/" target="_blank">GitHub ↗</a>
-        <a class="btn btn-ghost" href="https://linkedin.com/" target="_blank">LinkedIn ↗</a>
+        <a class="btn btn-primary" href="CV.pdf">Download CV (PDF)</a>
+        <a class="btn btn-ghost" href="https://github.com/samu0805" target="_blank">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/samuel-granados" target="_blank">LinkedIn ↗</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -540,7 +629,6 @@
 </footer>
 
 <script>
-  // Mobile nav toggle
   document.querySelector('.navtoggle').addEventListener('click', () => {
     const nl = document.querySelector('.navlinks');
     nl.style.display = nl.style.display === 'flex' ? 'none' : 'flex';
@@ -553,7 +641,6 @@
 
   document.getElementById('lastmod').textContent = new Date().toISOString().slice(0,10);
 
-  // Oscilloscope canvas: sine -> SPWM morph, looping
   const canvas = document.getElementById('scope');
   const ctx = canvas.getContext('2d');
   function resize(){
@@ -568,34 +655,30 @@
     const w = canvas.width, h = canvas.height;
     ctx.clearRect(0,0,w,h);
 
-    // grid
     ctx.strokeStyle = 'rgba(30,40,48,0.6)';
     ctx.lineWidth = 1;
     const cols = 12, rows = 4;
     for(let i=0;i<=cols;i++){ const x=(w/cols)*i; ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
     for(let j=0;j<=rows;j++){ const y=(h/rows)*j; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
 
-    // morph factor: cycles between sine (0) and SPWM (1)
-    const cycle = (Math.sin(t*0.15)+1)/2; // 0..1
     const mid = h/2;
-    const amp = h*0.32;
+    const amp = h*0.28;
+    const colors = ['#6EF2A6', '#FFB454', '#7FB8FF'];
 
-    ctx.beginPath();
-    ctx.strokeStyle = '#6EF2A6';
-    ctx.lineWidth = 2 * devicePixelRatio;
-    ctx.shadowColor = '#6EF2A6';
-    ctx.shadowBlur = 6;
-
-    const carrierFreq = 40;
-    for(let x=0; x<=w; x+=2){
-      const phase = (x/w)*Math.PI*4 + t*0.06;
-      const sine = Math.sin(phase);
-      const carrier = ((x % (w/carrierFreq)) / (w/carrierFreq)) * 2 - 1;
-      const spwmVal = sine > carrier ? 1 : -1;
-      const y = mid - (sine*(1-cycle) + spwmVal*cycle) * amp;
-      if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    for(let ph=0; ph<3; ph++){
+      ctx.beginPath();
+      ctx.strokeStyle = colors[ph];
+      ctx.lineWidth = 2 * devicePixelRatio;
+      ctx.shadowColor = colors[ph];
+      ctx.shadowBlur = 5;
+      const offset = ph * (Math.PI*2/3);
+      for(let x=0; x<=w; x+=3){
+        const phase = (x/w)*Math.PI*4 + t*0.05 + offset;
+        const y = mid - Math.sin(phase) * amp;
+        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
     }
-    ctx.stroke();
     ctx.shadowBlur = 0;
 
     t += 1;
@@ -603,7 +686,6 @@
   }
   draw();
 
-  // scroll-reveal for project cards
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='translateY(0)'; } });
   }, {threshold:0.1});
