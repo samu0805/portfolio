@@ -166,6 +166,15 @@
     margin-top:18px; padding:12px 14px; border:1px dashed var(--amber);
     border-radius:3px; font-family:'IBM Plex Mono'; font-size:11.5px; color:var(--amber);
   }
+  .bench-photo{
+    margin:6px 0 4px; border:1px solid var(--line); border-radius:4px;
+    overflow:hidden; background:var(--panel-2);
+  }
+  .bench-photo img{width:100%; display:block;}
+  .bench-photo figcaption{
+    padding:10px 14px; font-size:10.5px; color:var(--text-faint);
+    border-top:1px solid var(--line-soft); letter-spacing:0.3px;
+  }
 
   @media (max-width:640px){ .stage{grid-template-columns:1fr;} }
 
@@ -372,6 +381,12 @@
             <div class="stage-label">Test</div>
             <div class="stage-text">Open-loop bench tests varying modulation index and commanded frequency, measuring both inverter-side (motor) and grid-side (line) voltage, current, and power.</div>
           </div>
+
+          <figure class="bench-photo">
+            <img src="vfd-bench.jpg" alt="Bench validation of the VFD inverter — three-phase bridge, STM32 Blackpill, and Fluke multimeter reading 110.96V">
+            <figcaption class="mono">BENCH VALIDATION — six-switch bridge, STM32 Blackpill control, Fluke reading 110.96V on the rectified DC bus</figcaption>
+          </figure>
+
           <div class="stage">
             <div class="stage-label">Results &amp; Learnings</div>
             <div class="stage-text">At m=0.98 / 36 Hz the inverter delivered 109 V RMS / 1.6 A RMS, driving the motor to 2152 RPM; scaling down to m=0.25 / 9 Hz produced 56 V RMS / 1.1 A RMS at 538 RPM — confirming speed control across the range. Grid-side power factor measured low (0.20–0.26), expected for an uncorrected single-phase rectifier front-end. Critical review of the implementation found the modulation index was held constant per test point rather than scaling continuously with commanded frequency — the fix identified for a fully compliant closed-loop V/f controller in the next iteration.</div>
@@ -382,7 +397,7 @@
             <div><div class="spec-k">Sample Time</div><div class="spec-v">Ts = 100 µs</div></div>
             <div><div class="spec-k">Max Output</div><div class="spec-v">109 VRMS @ 36Hz</div></div>
           </div>
-          <div class="todo-banner">Team project (Servicio Social, Análisis de Sistemas Energéticos) with Patricio González Salinas, Ángel Eduardo López Solís &amp; Juan Guillermo Montoya Oviedo — for AMI Automation. Send PCB/board photos or scope captures if you have them and I'll drop them in.</div>
+          <div class="todo-banner">Team project (Servicio Social, Análisis de Sistemas Energéticos) with Patricio González Salinas, Ángel Eduardo López Solís &amp; Juan Guillermo Montoya Oviedo — for AMI Automation.</div>
         </div>
       </div>
     </div>
