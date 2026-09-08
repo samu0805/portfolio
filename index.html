@@ -128,6 +128,10 @@
   .project-top:hover{background:var(--panel-2);}
   .project-id{font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-faint); min-width:52px;}
   .project-name{font-size:18px; font-weight:600; flex:1;}
+  .project-plain{
+    font-size:12.5px; color:var(--text-faint); font-style:italic;
+    padding:0 22px 14px; margin-top:-8px; max-width:640px;
+  }
   .project-tags{display:flex; gap:8px; flex-wrap:wrap;}
   .tag{
     font-family:'IBM Plex Mono'; font-size:10.5px; color:var(--trace);
@@ -175,6 +179,7 @@
     padding:10px 14px; font-size:10.5px; color:var(--text-faint);
     border-top:1px solid var(--line-soft); letter-spacing:0.3px;
   }
+  .report-btn{margin-top:18px; display:inline-flex;}
 
   @media (max-width:640px){ .stage{grid-template-columns:1fr;} }
 
@@ -197,12 +202,8 @@
     width:100%; aspect-ratio:1/1; border:1px solid var(--line); border-radius:4px;
     overflow:hidden; position:relative; background:var(--panel);
   }
-  .profile-photo img{width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05) brightness(0.95); display:block;}
-  .profile-photo::after{
-    content:''; position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(160deg, rgba(110,242,166,0.20), rgba(10,14,18,0.05) 60%);
-    mix-blend-mode:screen;
-  }
+  .profile-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .profile-photo::after{ display:none; }
   .profile-photo.img-missing img{display:none;}
   .img-missing-note{
     display:none; position:absolute; inset:0; align-items:center; justify-content:center;
@@ -249,6 +250,7 @@
         <a href="#projects">Projects</a>
         <a href="#embedded">Embedded</a>
         <a href="#power">Power &amp; Energy</a>
+        <a href="#global">Global</a>
         <a href="#cv">CV</a>
       </div>
       <button class="navtoggle mono">MENU</button>
@@ -258,9 +260,9 @@
 
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow mono">Electronics · Embedded · Power</div>
+    <div class="eyebrow mono">Electronics · Power Electronics · Energy Systems</div>
     <h1>Building the circuits that <span class="accent">move energy</span> — from silicon to the motor shaft.</h1>
-    <p class="lead">Electronics engineering student at Tecnológico de Monterrey specializing in hardware design and power electronics. I design, validate, and test real systems — from firmware shields to power inverters — and I've done it inside industry teams, not just the lab.</p>
+    <p class="lead">Electronics engineering student at Tecnológico de Monterrey, preparing for a career in the <strong style="color:var(--text)">energy sector</strong> through power electronics and hardware design. I design, validate, and test real systems — from firmware shields to power inverters — inside industry teams, not just the lab.</p>
 
     <div class="hero-scope">
       <div class="scope-head">
@@ -296,9 +298,10 @@
         <div class="profile-caption mono">SAMUEL GRANADOS<br>Monterrey, N.L.</div>
       </div>
       <div class="about-text">
-        <p>I'm an electronics engineering student at <strong>Tecnológico de Monterrey</strong> (GPA 3.8/4.0, Full Academic Leadership Scholarship), specializing in <strong>hardware design and power electronics</strong>. I'm heading to <strong>HKUST</strong> for an exchange semester in Fall 2026.</p>
-        <p>Most of what's on this site comes from working inside real engineering teams — validating firmware at Carrier, leading power electronics for RoBorregos' competition robot, and building circuits with industry sponsors like Bendix, DIRAM, OPmobility, and Acuity Brands.</p>
-        <p>Outside the lab, I lead as <strong>Director of Finance for RoBorregos</strong>, managing a $700K+ MXN budget and securing $400K+ MXN in sponsorships for national and international competitions. I was also selected as the first fully sponsored student for the <strong>PLEI Asia Mission</strong>, an international business and leadership program conducting market research across China, Taiwan, Indonesia, Thailand, Malaysia, and Vietnam.</p>
+        <p>I'm an electronics engineering student at <strong>Tecnológico de Monterrey</strong> (GPA 3.8/4.0, Full Academic Leadership Scholarship), specializing in <strong>power electronics and hardware design</strong> — building toward a career in the energy sector.</p>
+        <p>This Fall I'm on exchange at <strong>HKUST</strong>, taking IC Design, FPGA, and Transnational Legal Issues &amp; Dispute Settlement — a deliberate mix of deep technical specialization and the international/legal literacy that comes with working across borders. I've also started early-stage power electronics research in <strong>Prof. Wang Ping's lab</strong>.</p>
+        <p>Most of what's on this site comes from working inside real engineering teams — validating firmware at Carrier, leading power electronics for RoBorregos' competition robot, and building a three-phase motor inverter for AMI Automation.</p>
+        <p>At the same time, I represent Mexican industry abroad: as the first fully sponsored student selected for the <strong>PLEI Asia Mission</strong>, I sourced 30+ potential suppliers across Asia for DYL Medic and studied how a leading nearshoring agency operates in the Philippines on behalf of Intugo — technical preparation and international groundwork, moving together.</p>
       </div>
       <div class="trajectory">
         <div class="traj-item">
@@ -314,12 +317,16 @@
           <div class="traj-v">3-phase motor inverter, RoBorregos BMS (1st place), DIRAM PID, Bendix magnetics</div>
         </div>
         <div class="traj-item">
+          <div class="traj-k mono">GLOBAL REACH</div>
+          <div class="traj-v">PLEI Asia Mission — supplier sourcing for DYL Medic, market study for Intugo (Philippines)</div>
+        </div>
+        <div class="traj-item">
           <div class="traj-k mono">LEADERSHIP</div>
-          <div class="traj-v">Director of Finance, RoBorregos · PLEI Asia Mission (selected member)</div>
+          <div class="traj-v">Director of Finance, RoBorregos — $700K+ MXN budget, $400K+ MXN in sponsorships secured</div>
         </div>
         <div class="traj-item">
           <div class="traj-k mono">NEXT</div>
-          <div class="traj-v">HKUST exchange, Fall 2026 — deeper into power converters &amp; energy systems</div>
+          <div class="traj-v">HKUST, Fall 2026 — IC Design, FPGA, and early power electronics research toward energy systems</div>
         </div>
       </div>
     </div>
@@ -348,6 +355,7 @@
         </span>
         <span class="project-chevron">+</span>
       </div>
+      <div class="project-plain">In plain terms: turns a regular single-phase wall outlet into a variable-speed power source for an industrial 3-phase motor.</div>
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
@@ -414,6 +422,7 @@
         </span>
         <span class="project-chevron">+</span>
       </div>
+      <div class="project-plain">In plain terms: a test bench that pretends to be a real air-conditioning sensor, so new firmware can be checked before it ever touches a real HVAC unit.</div>
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
@@ -461,6 +470,7 @@
         </span>
         <span class="project-chevron">+</span>
       </div>
+      <div class="project-plain">In plain terms: kept a competition robot's batteries and power supply from failing mid-match.</div>
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
@@ -476,8 +486,14 @@
           </div>
           <div class="stage">
             <div class="stage-label">Design &amp; Hardware</div>
-            <div class="stage-text">Modified and integrated a custom BMS with a multi-rail power distribution board, working within an 8-engineer team to coordinate subsystem power budgets. <em>[add schematic + board photos]</em></div>
+            <div class="stage-text">Modified and integrated a custom BMS with a multi-rail power distribution board, working within an 8-engineer team to coordinate subsystem power budgets.</div>
           </div>
+
+          <figure class="bench-photo">
+            <img src="bms-board.png" alt="Custom BMS and power distribution board for the RoBorregos competition robot">
+            <figcaption class="mono">BMS + POWER DISTRIBUTION BOARD — pack/battery terminals, MOSFET switching bank, cell-balance resistor array, and USB-C/BLE interface</figcaption>
+          </figure>
+
           <div class="stage">
             <div class="stage-label">Results</div>
             <div class="stage-text">The system earned 1st Place Nationally at the Mexican Tournament of Robotics (April 2026), running reliably across the competition. <em>[add uptime/reliability data if available]</em></div>
@@ -503,6 +519,7 @@
         </span>
         <span class="project-chevron">+</span>
       </div>
+      <div class="project-plain">In plain terms: taught an industrial machine to move to the exact position it's told, every time, without overshooting.</div>
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
@@ -541,44 +558,55 @@
     <div class="project">
       <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
         <span class="project-id mono">P.05</span>
-        <span class="project-name">Automotive Lighting Protection System — OPmobility</span>
+        <span class="project-name">ECU Diagnostic Prototype for Automotive Lighting — OPmobility Challenge 2025</span>
         <span class="project-tags">
-          <span class="tag">PIC18</span>
+          <span class="tag">ATmega328P</span>
           <span class="tag">Fault Detection</span>
-          <span class="tag">Automotive</span>
+          <span class="tag">Functional Safety</span>
         </span>
         <span class="project-chevron">+</span>
       </div>
+      <div class="project-plain">In plain terms: a smart fuse for car headlights that senses electrical and heat faults, logs them, and reacts before they cause damage.</div>
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
-            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>TEST</span><span>RESULTS</span>
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>TEST</span><span>RESULTS</span>
           </div>
           <div class="stage">
             <div class="stage-label">Problem</div>
-            <div class="stage-text">Automotive lighting circuits need to detect fault conditions (shorts, opens) quickly to protect both the circuit and the vehicle's electrical system.</div>
+            <div class="stage-text">Commercial automotive ECUs are complex and costly to use during early prototyping, leaving a gap for an accessible platform that can detect faults in LED lighting modules, log events, and apply basic functional-safety responses without specialized equipment.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Objective</div>
-            <div class="stage-text">Design a protection and control system for automotive lighting with reliable fault detection built in.</div>
+            <div class="stage-text">Build a diagnostic ECU prototype that monitors voltage, current, and temperature across LED channels; detects overvoltage, undervoltage, open-circuit, short-circuit, and overtemperature conditions; logs faults persistently; and reports status over UART.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Design</div>
-            <div class="stage-text">Built around a PIC18 microcontroller, using mirror-current sensing to detect fault conditions and trigger protective action without added external sensors.</div>
+            <div class="stage-text">A PIC18F45K50 was originally specified, but an irreparable configuration fault and lack of stock forced a migration to an ATmega328P (Arduino UNO) mid-project — chosen for faster integration, immediate availability, and sufficient ADC/UART capability without compromising the diagnostic scope.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Hardware</div>
+            <div class="stage-text">Voltage-divider sensing network feeding the ADC to monitor 4 LED channels plus supply voltage; a thermistor (10 mV/°C) for thermal monitoring; a 4×4 matrix keypad for user interaction; BJTs (2N3904/2N3906) and an LM317 regulator supporting the sensing/driving circuitry. Schematic and layout verified in Proteus before physical build.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Software</div>
+            <div class="stage-text">Firmware in C (AVR-GCC, direct register access) at 16 MHz: round-robin ADC sampling across 6 channels, Timer0-driven software PWM for LED channel control, full-duplex UART at 115200 bps (8N1) for diagnostic reporting, and persistent fault counting via EEPROM read/write.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Test</div>
-            <div class="stage-text">Validated the system against simulated fault scenarios using the mirror-current readings to confirm correct fault detection. <em>[add specific fault scenarios tested]</em></div>
+            <div class="stage-text">Unit tests validated each peripheral in isolation (UART framing, ADC + thermistor response, GPIO/keypad); integration tests then confirmed the full diagnostic chain end-to-end — physically disconnecting an LED channel and verifying detection, EEPROM logging, PWM shutdown, and UART reporting all fired correctly together.</div>
           </div>
           <div class="stage">
-            <div class="stage-label">Results</div>
-            <div class="stage-text">System correctly identified fault conditions using mirror currents, meeting OPmobility's validation criteria. <em>[add final validation numbers]</em></div>
+            <div class="stage-label">Results &amp; Learnings</div>
+            <div class="stage-text">All functional requirements passed: correct detection of overvoltage/undervoltage/open/short/overtemperature, stable UART reporting with no corrupted frames, and reliable EEPROM fault persistence across power cycles. The team documented the PIC18→ATmega328P migration transparently rather than concealing the setback — a real example of adapting scope under a hardware failure without missing the challenge deadline.</div>
           </div>
           <div class="specs">
-            <div><div class="spec-k">MCU</div><div class="spec-v">PIC18</div></div>
-            <div><div class="spec-k">Sensing</div><div class="spec-v">Mirror Current</div></div>
+            <div><div class="spec-k">MCU</div><div class="spec-v">ATmega328P</div></div>
+            <div><div class="spec-k">Sensing</div><div class="spec-v">ADC + Thermistor</div></div>
+            <div><div class="spec-k">UART</div><div class="spec-v">115200 bps</div></div>
             <div><div class="spec-k">Partner</div><div class="spec-v">OPmobility</div></div>
           </div>
+          <a class="btn btn-ghost report-btn" href="report-opmobility.pdf" target="_blank">View Full Technical Report (PDF) ↗</a>
         </div>
       </div>
     </div>
@@ -640,15 +668,44 @@
         <h3>3-Phase Motor Inverter</h3>
         <p>See Project P.01 above — a single-phase to three-phase inverter built this semester, the most direct power-electronics case study on this site so far.</p>
       </div>
-      <div class="card placeholder">
-        <div class="card-icon mono">[BESS]</div>
-        <h3>Battery Energy Storage (BESS)</h3>
-        <p>Placeholder — a future project or analysis around energy storage design.</p>
+      <div class="card">
+        <div class="card-icon mono">[LAB]</div>
+        <h3>HKUST Research — Prof. Wang Ping's Lab</h3>
+        <p>Early-stage power electronics research underway as part of my exchange semester — details to follow as the work develops.</p>
       </div>
       <div class="card placeholder">
         <div class="card-icon mono">[GRID]</div>
         <h3>Grid-Facing Power Electronics</h3>
         <p>Placeholder — power factor correction, inverter design, or converter work aimed at larger energy systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="global">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label mono">05 — Beyond the Bench</div>
+        <div class="sec-title">Global Reach</div>
+      </div>
+      <div class="sec-note">Technical preparation and international groundwork, moving together.</div>
+    </div>
+    <div class="cardgrid">
+      <div class="card">
+        <div class="card-icon mono">[$]</div>
+        <h3>Director of Finance — RoBorregos</h3>
+        <p>Lead a 10-member team in fundraising and budget planning: $700K+ MXN total budget managed, $400K+ MXN in corporate sponsorships secured for national and international robotics competitions.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon mono">[SRC]</div>
+        <h3>Supplier Sourcing — DYL Medic (PLEI Asia Mission)</h3>
+        <p>Evaluated 30+ potential mobility-aid component suppliers across Asia for DYL Medic, a Mexican mobility-aid manufacturer, as the first fully sponsored student selected for the mission.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon mono">[PH]</div>
+        <h3>Market Study — Intugo (Philippines)</h3>
+        <p>Studied how a leading shelter/nearshoring agency operates in the Philippines, surfacing insight to inform Intugo's future collaboration in the region.</p>
       </div>
     </div>
   </div>
