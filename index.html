@@ -202,8 +202,12 @@
     width:100%; aspect-ratio:1/1; border:1px solid var(--line); border-radius:4px;
     overflow:hidden; position:relative; background:var(--panel);
   }
-  .profile-photo img{width:100%; height:100%; object-fit:cover; display:block;}
-  .profile-photo::after{ display:none; }
+  .profile-photo img{width:100%; height:100%; object-fit:cover; object-position:center 15%; filter:grayscale(0.85) contrast(1.02) brightness(1.05); display:block;}
+  .profile-photo::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(160deg, rgba(110,242,166,0.10), rgba(10,14,18,0.02) 60%);
+    mix-blend-mode:screen;
+  }
   .profile-photo.img-missing img{display:none;}
   .img-missing-note{
     display:none; position:absolute; inset:0; align-items:center; justify-content:center;
@@ -301,7 +305,7 @@
         <p>I'm an electronics engineering student at <strong>Tecnológico de Monterrey</strong> (GPA 3.8/4.0, Full Academic Leadership Scholarship), specializing in <strong>power electronics and hardware design</strong> — building toward a career in the energy sector.</p>
         <p>This Fall I'm on exchange at <strong>HKUST</strong>, taking IC Design, FPGA, and Transnational Legal Issues &amp; Dispute Settlement — a deliberate mix of deep technical specialization and the international/legal literacy that comes with working across borders. I've also started early-stage power electronics research in <strong>Prof. Wang Ping's lab</strong>.</p>
         <p>Most of what's on this site comes from working inside real engineering teams — validating firmware at Carrier, leading power electronics for RoBorregos' competition robot, and building a three-phase motor inverter for AMI Automation.</p>
-        <p>At the same time, I represent Mexican industry abroad: as the first fully sponsored student selected for the <strong>PLEI Asia Mission</strong>, I sourced 30+ potential suppliers across Asia for DYL Medic and studied how a leading nearshoring agency operates in the Philippines on behalf of Intugo — technical preparation and international groundwork, moving together.</p>
+        <p>At the same time, I represent Mexican industry abroad: as the first fully sponsored student selected for the <strong>PLEI Asia Mission</strong>, I evaluated 30+ potential suppliers across Asia for DYL Medic (visiting 6 in person) and studied how a leading nearshoring agency operates in the Philippines on behalf of Intugo — technical preparation and international groundwork, moving together.</p>
       </div>
       <div class="trajectory">
         <div class="traj-item">
@@ -700,12 +704,12 @@
       <div class="card">
         <div class="card-icon mono">[SRC]</div>
         <h3>Supplier Sourcing — DYL Medic (PLEI Asia Mission)</h3>
-        <p>Evaluated 30+ potential mobility-aid component suppliers across Asia for DYL Medic, a Mexican mobility-aid manufacturer, as the first fully sponsored student selected for the mission.</p>
+        <p>Evaluated 30+ potential mobility-aid component suppliers across Asia for DYL Medic, a Mexican mobility-aid manufacturer, visiting 6 in person as the first fully sponsored student selected for the mission.</p>
       </div>
       <div class="card">
         <div class="card-icon mono">[PH]</div>
         <h3>Market Study — Intugo (Philippines)</h3>
-        <p>Studied how a leading shelter/nearshoring agency operates in the Philippines, surfacing insight to inform Intugo's future collaboration in the region.</p>
+        <p>Studied how a leading shelter/nearshoring agency operates in the Philippines — the market specifically assigned for this engagement — surfacing insight to inform Intugo's future collaboration there.</p>
       </div>
     </div>
   </div>
