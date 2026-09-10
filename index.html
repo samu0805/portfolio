@@ -450,13 +450,14 @@
           </div>
           <div class="stage">
             <div class="stage-label">Results</div>
-            <div class="stage-text">Gave the Independent Test &amp; Validation team a repeatable bench setup to validate firmware behavior without needing physical field rigs. <em>[add specific validation coverage / time saved if available]</em></div>
+            <div class="stage-text">Gave the Independent Test &amp; Validation team a repeatable bench setup to validate firmware behavior without needing physical field rigs — cutting roughly 3 hours of manual setup per test cycle by replacing voltage-divider/potentiometer rigs with a digital, repeatable signal source.</div>
           </div>
           <div class="specs">
             <div><div class="spec-k">MCU</div><div class="spec-v">STM32H563ZI</div></div>
             <div><div class="spec-k">RTOS</div><div class="spec-v">FreeRTOS</div></div>
             <div><div class="spec-k">Signals</div><div class="spec-v">24VAC / PWM</div></div>
             <div><div class="spec-k">Team</div><div class="spec-v">Carrier — S&amp;C CoE</div></div>
+            <div><div class="spec-k">Setup Time Saved</div><div class="spec-v">~3 hrs / test</div></div>
           </div>
         </div>
       </div>
@@ -490,7 +491,7 @@
           </div>
           <div class="stage">
             <div class="stage-label">Design &amp; Hardware</div>
-            <div class="stage-text">Modified and integrated a custom BMS with a multi-rail power distribution board, working within an 8-engineer team to coordinate subsystem power budgets.</div>
+            <div class="stage-text">Built on an adapted <a href="https://libre.solar/" target="_blank" style="color:var(--trace); text-decoration:underline;">LibreSolar</a> open-source BMS design — assembled the board and modified both firmware and component placement to integrate with the distribution board and fit RoBorregos' FRIDA @HOME robot, working within an 8-engineer team to coordinate subsystem power budgets.</div>
           </div>
 
           <figure class="bench-photo">
@@ -500,12 +501,13 @@
 
           <div class="stage">
             <div class="stage-label">Results</div>
-            <div class="stage-text">The system earned 1st Place Nationally at the Mexican Tournament of Robotics (April 2026), running reliably across the competition. <em>[add uptime/reliability data if available]</em></div>
+            <div class="stage-text">The system earned 1st Place Nationally at the Mexican Tournament of Robotics (April 2026) with zero power-related failures across the entire competition — qualifying rounds and finals included.</div>
           </div>
           <div class="specs">
             <div><div class="spec-k">Power</div><div class="spec-v">1200 W</div></div>
             <div><div class="spec-k">Result</div><div class="spec-v">1st — National</div></div>
             <div><div class="spec-k">Role</div><div class="spec-v">Electronics PM</div></div>
+            <div><div class="spec-k">Reliability</div><div class="spec-v">0 Failures</div></div>
           </div>
         </div>
       </div>
@@ -515,46 +517,52 @@
     <div class="project">
       <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
         <span class="project-id mono">P.04</span>
-        <span class="project-name">PID-Based Position Control — DIRAM</span>
+        <span class="project-name">DC Motor Position Control — DIRAM</span>
         <span class="project-tags">
-          <span class="tag">PID</span>
-          <span class="tag">Controls</span>
-          <span class="tag">Industrial</span>
+          <span class="tag">PID / PI</span>
+          <span class="tag">TI F28379D</span>
+          <span class="tag">Ziegler-Nichols</span>
         </span>
         <span class="project-chevron">+</span>
       </div>
-      <div class="project-plain">In plain terms: taught an industrial machine to move to the exact position it's told, every time, without overshooting.</div>
+      <div class="project-plain">In plain terms: taught a small industrial motor to turn to the exact angle it's told, quickly and without shaking itself apart.</div>
       <div class="project-body">
         <div class="project-body-inner">
           <div class="pipeline">
-            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>TEST</span><span>RESULTS</span>
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>TUNING</span><span>RESULTS &amp; LIMITATIONS</span>
           </div>
           <div class="stage">
             <div class="stage-label">Problem</div>
-            <div class="stage-text">An industrial process required a position control system meeting specific performance criteria — accuracy and response speed the open-loop approach couldn't deliver.</div>
+            <div class="stage-text">Precise, reliable position control is a baseline requirement across robotics, manufacturing, and medical devices — the challenge was building that capability from scratch on a real DC gearmotor, not just in simulation.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Objective</div>
-            <div class="stage-text">Develop and tune a PID-based closed-loop control system to meet DIRAM's industrial performance targets.</div>
+            <div class="stage-text">Take a DC motor from mathematical model to a working closed-loop position controller: characterize the plant, design and simulate a digital PID, tune it, then deploy and validate it on hardware.</div>
           </div>
           <div class="stage">
             <div class="stage-label">Design</div>
-            <div class="stage-text"><em>[Add: plant/actuator description, sensor used for position feedback, tuning method — Ziegler-Nichols, manual, or software-assisted]</em></div>
+            <div class="stage-text">Modeled the motor with its electrical (V = L·di/dt + Ri + Ke·ω) and mechanical (J·dω/dt + Bω = Kt·i − Tload) equations, characterizing armature resistance, torque/back-EMF constant, and viscous friction experimentally. Built the control loop in Simulink using C2000-specific blocks: an eQEP block to read the encoder, a discrete PID(z), and dual ePWM outputs (one inverted) to drive the H-bridge in both directions.</div>
           </div>
           <div class="stage">
-            <div class="stage-label">Test</div>
-            <div class="stage-text">Analyzed system step response to validate settling time, overshoot, and steady-state accuracy against DIRAM's criteria. <em>[add response plots if available]</em></div>
+            <div class="stage-label">Hardware</div>
+            <div class="stage-text">GA25-370 DC gearmotor with a Hall-effect encoder (~2200 pulses/revolution), an L298H H-bridge driver, and a TI LAUNCHXL-F28379D as the controller.</div>
           </div>
           <div class="stage">
-            <div class="stage-label">Results</div>
-            <div class="stage-text">Tuned controller met the required industrial performance criteria. <em>[add final settling time / overshoot / accuracy numbers]</em></div>
+            <div class="stage-label">Tuning</div>
+            <div class="stage-text">Started from Ziegler-Nichols gains derived from a simulated critical gain/period — but on real hardware those values oscillated the system almost immediately. Manual re-tuning converged on Kp=400, Ki=150; the derivative term was dropped entirely after it injected significant noise into the control signal, simplifying the design from PID to PI for a cleaner, stable response.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results &amp; Limitations</div>
+            <div class="stage-text">Simulation confirmed the control approach: stable convergence to the reference with minimal steady-state error. On hardware, the PI re-tune held the motor at reference angle without the oscillation the theoretical PID gains caused — but full experimental validation (logged speed/position data under load) was left incomplete due to development-board upload time eating into the testing window. That gap — theoretical gains failing in practice, then debugging why — was the most useful part of the project.</div>
           </div>
           <div class="specs">
-            <div><div class="spec-k">Control</div><div class="spec-v">PID</div></div>
-            <div><div class="spec-k">Type</div><div class="spec-v">Position</div></div>
-            <div><div class="spec-k">Partner</div><div class="spec-v">DIRAM</div></div>
+            <div><div class="spec-k">Motor</div><div class="spec-v">GA25-370 DC</div></div>
+            <div><div class="spec-k">Encoder</div><div class="spec-v">~2200 PPR</div></div>
+            <div><div class="spec-k">Final Gains</div><div class="spec-v">Kp=400, Ki=150</div></div>
+            <div><div class="spec-k">Driver</div><div class="spec-v">L298H</div></div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -615,6 +623,218 @@
       </div>
     </div>
 
+    <!-- PROJECT 6: BENDIX INDUCTOR -->
+    <div class="project">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.06</span>
+        <span class="project-name">Custom Toroidal Inductor Design — Bendix</span>
+        <span class="project-tags">
+          <span class="tag">COMSOL</span>
+          <span class="tag">Magnetics</span>
+          <span class="tag">FEM Simulation</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-plain">In plain terms: figured out exactly how many coil turns, what wire thickness, and what core material to use to build a custom inductor that meets Bendix's real specs — without building and testing dozens of physical prototypes first.</div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>METHOD</span><span>RESULTS: TURNS &amp; MATERIAL</span><span>RESULTS: CURRENT &amp; FREQUENCY</span><span>RECOMMENDATIONS</span>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Problem</div>
+            <div class="stage-text">Bendix needed a custom inductor meeting specific circuit requirements — inductance and a 1.5A nominal continuous current without core saturation — where off-the-shelf parts didn't line up cleanly with the target electrical behavior.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Objective</div>
+            <div class="stage-text">Use finite-element simulation to characterize how turns count, wire gauge, and core material affect magnetic flux density, inductance, resistance, and resonant frequency of a toroidal inductor — isolating which parameters actually matter for Bendix's spec.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Method</div>
+            <div class="stage-text">Built a fully parametric toroidal coil model in COMSOL Multiphysics (baseline: 20 turns, 0.75mm wire, 12.7mm OD / 7.62mm ID / 4.75mm height core) and ran stationary magnetic-field and circuit-coupled studies, changing exactly one variable at a time — turns (10–40), wire radius (0.75mm vs 0.5mm), and core material (Alloy Powder µr=1000, Ferrite µr=5000, an intermediate µr=400) — then swept frequency from 1–10MHz to characterize impedance and resonance.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results: Turns &amp; Material</div>
+            <div class="stage-text">Inductance scaled directly with both turns and core permeability: going from 10 to 35 turns raised inductance from 0.28mH to 3.5mH on the original core, while simply swapping to ferrite (µr=5000) at a fixed 20 turns raised it from 1.15mH to 5.76mH — a bigger jump than adding 15 more turns. Halving the wire radius (0.75mm → 0.5mm) roughly doubled coil resistance (0.014Ω → 0.032Ω) while barely moving inductance, confirming wire gauge mainly trades off resistive loss, not energy storage.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results: Current &amp; Frequency</div>
+            <div class="stage-text">A circuit-coupled simulation (1V source, 100mΩ series resistance) drove the 10-turn coil to 9.3A structurally — well above Bendix's 1.5A nominal spec — and the flux simulation confirmed the core stayed far from saturation at that operating current. Higher-inductance configurations pushed the resonant frequency lower: ~9.5MHz at 10 turns vs ~2MHz at 35 turns, a direct trade-off to weigh against Bendix's frequency requirements.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Recommendations</div>
+            <div class="stage-text">To raise inductance: use a high-permeability, low-conductivity core (ferrite) and/or more turns. To raise resonant frequency instead: do the opposite — fewer turns or lower-permeability core. To reduce impedance: more turns, thinner wire, or a lower-permeability core. All of it buildable with industry-standard parts — ferrite cores and 0.5–2mm wire gauges.</div>
+          </div>
+          <div class="specs">
+            <div><div class="spec-k">Core (baseline)</div><div class="spec-v">Alloy Powder, µr=1000</div></div>
+            <div><div class="spec-k">Inductance Range</div><div class="spec-v">0.28 – 5.76 mH</div></div>
+            <div><div class="spec-k">Target Current</div><div class="spec-v">1.5 A nominal</div></div>
+            <div><div class="spec-k">Sim. Current Capacity</div><div class="spec-v">9.3 A</div></div>
+          </div>
+          <a class="btn btn-ghost report-btn" href="report-bendix.pdf" target="_blank">View Full Technical Report (PDF) ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 7: AGRONODE IoT -->
+    <div class="project">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.07</span>
+        <span class="project-name">AgroNode — Multi-Protocol IoT Sensor Node</span>
+        <span class="project-tags">
+          <span class="tag">ESP32-S3</span>
+          <span class="tag">LoRa / RF</span>
+          <span class="tag">IoT</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-plain">In plain terms: built a field sensor box for farms that talks to the cloud three different ways, so it never fully loses connection — and when one of those ways badly underperformed, figured out exactly why with the math, not guesswork.</div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>PROBLEM</span><span>OBJECTIVE</span><span>DESIGN</span><span>HARDWARE</span><span>SOFTWARE</span><span>RESULTS</span><span>DIAGNOSIS &amp; LEARNINGS</span>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Problem</div>
+            <div class="stage-text">A field interview with a farmer managing ~400 hectares in northern Mexico surfaced the real pain point: separate, incompatible vendor apps for weather stations, RTK drones, and soil sensors — no single view of the field.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Objective</div>
+            <div class="stage-text">Build a field-deployable IoT node consolidating environmental, power, inertial, and GPS data into one cloud dashboard, resilient to the patchy connectivity typical of large rural properties.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Design</div>
+            <div class="stage-text">A two-node architecture (transmitter + receiver) around the Seeed XIAO ESP32-S3, with three parallel wireless channels chosen for different range/connectivity scenarios: ESP-NOW for short-range peer-to-peer, LoRa at 915MHz for long range, and 2G/GPRS as a cloud-uplink fallback. A single byte-identical 71-byte payload struct is transmitted across all three, and AES-128 encryption is applied at the ESP-NOW and LoRa layers.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Hardware</div>
+            <div class="stage-text">Custom two-layer KiCad PCB integrating a BME280 (temp/humidity/pressure), BH1750 light sensor, BNO085 9-DoF IMU for tamper detection, INA219 power monitor, RCWL-9200 ultrasonic sensor, NEO-6M GPS, RFM69HW LoRa radio, SIM800L 2G module, capacitive soil moisture sensor, OLED display, and an OV2640 camera running an on-device Edge Impulse classifier for intruder detection.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Software</div>
+            <div class="stage-text">PlatformIO/Arduino firmware with a shared packed struct header ensuring byte-level interoperability across channels, feature flags for compile-time configuration, per-channel link-health monitoring (failure counters and timeouts), and OTA firmware updates over Wi-Fi — letting field nodes be reprogrammed without physical access.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Results</div>
+            <div class="stage-text">ESP-NOW hit 100% packet delivery at 15m (vs. a 90% target) with sub-5ms latency. Cellular uplink reliably delivered all 11 variables to the Ubidots dashboard, including GPS rendered as a live map pin. LoRa, however, only achieved reliable delivery to ~1m — badly missing its 100m target.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Diagnosis &amp; Learnings</div>
+            <div class="stage-text">Rather than leaving the LoRa failure unexplained, the team used the Friis transmission equation and reflection-coefficient math to show the untuned default whip antenna caused ~20dB of mismatch loss — collapsing the theoretical 3.2km range down to the ~1m measured in the lab. That root-cause diagnosis, not just the failure itself, is the most valuable part of the project: it turns a disappointing result into a specific, quantified fix (a tuned λ/4 monopole) for the next hardware revision.</div>
+          </div>
+          <div class="specs">
+            <div><div class="spec-k">Channels</div><div class="spec-v">ESP-NOW / LoRa / 2G</div></div>
+            <div><div class="spec-k">ESP-NOW PDR</div><div class="spec-v">100% @ 15m</div></div>
+            <div><div class="spec-k">Payload</div><div class="spec-v">71 bytes</div></div>
+            <div><div class="spec-k">Encryption</div><div class="spec-v">AES-128</div></div>
+          </div>
+          <a class="btn btn-ghost report-btn" href="report-agronode.pdf" target="_blank">View Full Technical Paper (PDF) ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 8: SONORA BESS MICROGRID -->
+    <div class="project">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.08</span>
+        <span class="project-name">Hybrid PV Pumping Microgrid + BESS — Sonora Agriculture</span>
+        <span class="project-tags">
+          <span class="tag">BESS</span>
+          <span class="tag">VFD / MPPT</span>
+          <span class="tag">Techno-Economic</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-plain">In plain terms: designed a solar-plus-battery system to replace unreliable grid power and diesel for farm water pumps in the desert — then worked out the real math on when it actually pays for itself.</div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>PROBLEM</span><span>ELECTRICAL DESIGN</span><span>BESS SIZING</span><span>PV SIZING</span><span>LAND &amp; GOVERNANCE</span><span>FINANCIAL VIABILITY</span>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Problem</div>
+            <div class="stage-text">Agricultural groundwater pumping in Sonora, Mexico faces a triple bind: economic exposure to CFE's fluctuating agricultural tariff, technical instability from rural distribution lines causing severe voltage sags, and environmental cost from diesel backup generation — all in a region averaging 6.0 peak sun hours, ideal for distributed solar generation.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Electrical Design</div>
+            <div class="stage-text">Base system: a 25 HP (18.65 kW) three-phase induction motor on an 80m-deep submersible pump. Direct starts draw up to 7× rated current, hurting power factor and wasting energy as I²R heat — solved with a VFD using scalar V/f control plus a dynamic MPPT algorithm. Accounting for 88% motor efficiency (NEMA MG-1) and 96% VFD conversion efficiency: P_AC = 18.65kW / 0.88 = 21.19kW, and P_DC(bus) = 21.19kW / 0.96 = 22.08kW.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">BESS Sizing</div>
+            <div class="stage-text">Sized a LiFePO4 battery bank for 3 hours of autonomy during low-irradiance or night operation, at 80% depth-of-discharge and 90% round-trip efficiency: E_batt = (22.08kW × 3h) / (0.80 × 0.90) = 91.98 kWh — managed by a Master-Slave BMS architecture for thermal control and cell balancing under desert conditions.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">PV Sizing</div>
+            <div class="stage-text">Total daily energy need is direct pumping (22.08kW × 6h = 132.46kWh) plus BESS recharge (22.08kW × 3h / 0.90 = 73.59kWh) = 206.05 kWh/day. Applying a 20% derate for thermal losses and dust: P_array = 206.05kWh / (6h × 0.80) = 42.93 kWp — spec'd as 78 modules of 550Wp in a 6S13P configuration.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Land &amp; Governance</div>
+            <div class="stage-text">The 42.93 kWp array occupies ~400 m² — about 4% of one hectare — mounted on elevated agrivoltaic structures (2.8m clearance) that let tractors pass underneath while their partial shade reduces soil evapotranspiration and crop heat stress. Adoption is structured through a stakeholder matrix: producers via a community trust funded by fuel/tariff savings, CFE Distribución via a net-metering interconnection agreement, and CONAGUA using the solar capacity limit as a natural brake against aquifer overexploitation.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Financial Viability</div>
+            <div class="stage-text">Estimated CapEx of $1,250,000 MXN (the LFP battery bank alone is 46% of that) cuts annual OpEx from $230,000 MXN (diesel, maintenance, low-power-factor penalties) to $45,000 MXN — a simple payback of 6.75 years and a projected 15-year IRR of 14.2%, beating Mexico's reference TIIE rate. Applying available FIDE/FIRA/SADER green subsidies (up to 40% non-reimbursable) drops net CapEx to $750,000 MXN and payback to 4.05 years.</div>
+          </div>
+          <div class="specs">
+            <div><div class="spec-k">PV Array</div><div class="spec-v">42.93 kWp</div></div>
+            <div><div class="spec-k">BESS</div><div class="spec-v">91.98 kWh LFP</div></div>
+            <div><div class="spec-k">Payback</div><div class="spec-v">6.75 yr (4.05 w/ subsidy)</div></div>
+            <div><div class="spec-k">15-yr IRR</div><div class="spec-v">14.2%</div></div>
+          </div>
+          <a class="btn btn-ghost report-btn" href="report-sonora-bess.pdf" target="_blank">View Full Technical Paper (PDF) ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 9: ROVER VIO -->
+    <div class="project">
+      <div class="project-top" onclick="this.parentElement.classList.toggle('open')">
+        <span class="project-id mono">P.09</span>
+        <span class="project-name">Visual-Inertial Odometry Rover — 2D Positioning</span>
+        <span class="project-tags">
+          <span class="tag">EKF / Sensor Fusion</span>
+          <span class="tag">ESP32-S3</span>
+          <span class="tag">DSP</span>
+        </span>
+        <span class="project-chevron">+</span>
+      </div>
+      <div class="project-plain">In plain terms: gave a small rover a working sense of "where am I and which way am I facing" using only onboard sensors — no GPS — the same problem a lunar rover would face.</div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="pipeline">
+            <span>USE CASE</span><span>HARDWARE</span><span>DSP PIPELINE</span><span>COMMUNICATION</span><span>VALIDATION</span>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Use Case</div>
+            <div class="stage-text">Framed around a lunar rover scenario: no GPS or external positioning infrastructure available, so the vehicle must estimate its own position and orientation purely from onboard inertial and visual sensing.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Hardware</div>
+            <div class="stage-text">Dual-core ESP32-S3 (240MHz) running FreeRTOS, a BNO085 9-axis IMU with an internal Kalman filter delivering stable orientation quaternions directly, and an OV3660 camera for visual flow — sampled over I2C at 100Hz. Core 0 was dedicated almost entirely (95% load) to camera capture and processing, with Core 1 handling the remaining lighter tasks (20% load). The chassis went through three design iterations, from a vertical PCB-integrated board to a final rover-style structure built for stable mounting on uneven ground.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">DSP Pipeline</div>
+            <div class="stage-text">Synchronous I2C acquisition at 100Hz → digital filtering to remove bias and high-frequency noise → orientation via BNO085 quaternions → optical-flow motion estimation using a Sum-of-Absolute-Differences (SAD) algorithm over 24×24 pixel windows → sensor fusion via an Extended Kalman Filter combining inertial prediction with visual correction → Zero-Velocity Update (ZUPT, 0.20 m/s² threshold) to suppress static drift → 2D position integration with local-to-global coordinate transformation via yaw angle.</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Communication</div>
+            <div class="stage-text">A 59-byte payload (position, velocity, yaw, optical-flow validity flag, battery, anomaly flags) is transmitted via ESP-NOW at 10Hz to a Python-based base station, which drives a MATLAB digital twin visualizing the rover's live trajectory, heading history, and system health (SNR, anomaly detection).</div>
+          </div>
+          <div class="stage">
+            <div class="stage-label">Validation</div>
+            <div class="stage-text">End-to-end ESP-NOW latency stayed under 20ms — well inside the 100ms IEC 61588 requirement — with stable 10Hz transmission and no significant packet loss. On a 30×30cm square trajectory test (120cm total perimeter), accumulated position error landed right at the 5% acceptance threshold the team had set for itself, and the ZUPT algorithm correctly prevented drift while the rover sat stationary between runs.</div>
+          </div>
+          <div class="specs">
+            <div><div class="spec-k">Sensor Fusion</div><div class="spec-v">EKF (IMU + Vision)</div></div>
+            <div><div class="spec-k">Latency</div><div class="spec-v">&lt;20ms (ESP-NOW)</div></div>
+            <div><div class="spec-k">Position Error</div><div class="spec-v">~5% (test traj.)</div></div>
+            <div><div class="spec-k">Sample Rate</div><div class="spec-v">100Hz (IMU)</div></div>
+          </div>
+          <a class="btn btn-ghost report-btn" href="report-rover-vio.pdf" target="_blank">View Full Technical Report (PDF) ↗</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -665,7 +885,7 @@
       <div class="card">
         <div class="card-icon mono">[IND]</div>
         <h3>Custom Inductor — Bendix (COMSOL)</h3>
-        <p>Designed and simulated a custom inductor in COMSOL Multiphysics, optimizing magnetic performance and validating constraints with Bendix engineers.</p>
+        <p>See Project P.06 above — full parametric study of turns, wire gauge, and core material for a toroidal inductor meeting Bendix's current and inductance specs.</p>
       </div>
       <div class="card">
         <div class="card-icon mono">[INV]</div>
@@ -677,10 +897,10 @@
         <h3>HKUST Research — Prof. Wang Ping's Lab</h3>
         <p>Early-stage power electronics research underway as part of my exchange semester — details to follow as the work develops.</p>
       </div>
-      <div class="card placeholder">
-        <div class="card-icon mono">[GRID]</div>
-        <h3>Grid-Facing Power Electronics</h3>
-        <p>Placeholder — power factor correction, inverter design, or converter work aimed at larger energy systems.</p>
+      <div class="card">
+        <div class="card-icon mono">[BESS]</div>
+        <h3>Hybrid PV + BESS Microgrid — Sonora</h3>
+        <p>See Project P.08 above — full techno-economic design of a solar-plus-battery pumping microgrid, from VFD/MPPT sizing to payback and IRR.</p>
       </div>
     </div>
   </div>
